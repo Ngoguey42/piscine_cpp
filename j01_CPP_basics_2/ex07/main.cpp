@@ -1,3 +1,5 @@
+
+
 #include <fstream>
 #include <iostream>
 #include <string.h>
@@ -12,39 +14,40 @@ static void		copy_full_file(std::ifstream &in, std::ofstream &out)
 	return ;
 }
 
+static void		write_and_erase(std::ofstream &out, std::string &buf2, size_t towrite)
+{
+	out.write(buf2.c_str(), towrite);
+	buf2.erase(0, towrite);
+	return ;
+}
+
 /*
-** 'copy_replacing' Complicated function supporting new lines.
+** 'copy_replacing' Complicated function supporting new lines in av[3].
 */
 static void		copy_replacing(std::ifstream &in, std::ofstream &out, int ac, char *av[])
 {
-		const std::string	ref_str(av[2]);
-		const std::string	rep_str(ac > 3 ? av[3] : "");
-		const size_t		ref_len = ref_str.length();
-		const size_t		rep_len = rep_str.length();
-		char				buf1[ref_len * 2 - 1];
-		std::string			buf2("");
-		size_t				towrite;
+	const std::string	ref_str(av[2]);
+	const std::string	rep_str(ac > 3 ? av[3] : "");
+	const size_t		ref_len = ref_str.length();
+	const size_t		rep_len = rep_str.length();
+	char				buf1[ref_len * 2 - 1];
+	std::string			buf2("");
+	size_t				pos;
 
-		in.read(buf1, ref_len * 2 - 1);
-		do
+	in.read(buf1, ref_len * 2 - 1);
+	do
+	{
+		buf2.append(buf1, in.gcount());
+		pos = buf2.find(ref_str);
+		if (pos != std::string::npos)
 		{
-			buf2.append(buf1, in.gcount());
-			size_t	pos = buf2.find(ref_str);
-			if (pos != std::string::npos)
-			{
-				towrite = pos + rep_len;
-				buf2.replace(pos, ref_len, rep_str);
-				out.write(buf2.c_str(), towrite);
-				buf2.erase(0, towrite);
-			}
-			else if (buf2.length() >= ref_len)
-			{
-				towrite = buf2.length() - ref_len + 1;
-				out.write(buf2.c_str(), towrite);
-				buf2.erase(0, towrite);
-			}
-		} while (in.read(buf1, ref_len));
-		out << buf2;
+			buf2.replace(pos, ref_len, rep_str);
+			write_and_erase(out, buf2, pos + rep_len);
+		}
+		else if (buf2.length() >= ref_len)
+			write_and_erase(out, buf2, buf2.length() - ref_len + 1);
+	} while (in.read(buf1, ref_len));
+	out << buf2;
 	return ;
 }
 
