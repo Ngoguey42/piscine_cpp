@@ -54,19 +54,25 @@ static void		copy_replacing(std::ifstream &in, std::ofstream &out, int ac, char 
 int main(int ac, char *av[])
 {
 	std::ifstream	in(av[1]);
-	std::string		outname(av[1]);
+	std::string		outname;
 	std::ofstream	out;
 
-	if (!in || ac < 2)
+	if (ac < 2)
 	{
-		std::cerr << "Could not open " << av[1] << "\n";
+		std::cerr << "No file to open" << std::endl;
 		return 1;
 	}
+	if (!in)
+	{
+		std::cerr << "Could not open " << av[1] << std::endl;
+		return 1;
+	}
+	outname.assign(av[1]);
 	outname.append(".replace");
 	out.open(outname.c_str(), std::ofstream::out | std::ofstream::trunc);
 	if (!out)
 	{
-		std::cerr << "Could not open " << outname << "\n";
+		std::cerr << "Could not open " << outname << std::endl;
 		return 1;
 	}
 	if (ac < 3 || strlen(av[2]) == 0)
