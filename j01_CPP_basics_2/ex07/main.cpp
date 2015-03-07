@@ -22,7 +22,13 @@ static void		write_and_erase(std::ofstream &out, std::string &buf2, size_t towri
 }
 
 /*
-** 'copy_replacing' Complicated function supporting new lines in av[3].
+** 'copy_replacing' Complicated function supporting 'new lines' and '\0' in av[2].
+** Appends infile into buffers, in order to have:
+**		- Min (ref_len) chars in buffer.
+**		- Max (ref_len * 2 - 1) chars in buffer.
+** Pushes buffers into outfile:
+**		- Slow enough not to miss a 'ref_str'.
+**		- Fast enough not to replace chars from 'rep_str'.
 */
 static void		copy_replacing(std::ifstream &in, std::ofstream &out, int ac, char *av[])
 {
@@ -59,12 +65,12 @@ int main(int ac, char *av[])
 
 	if (ac < 2)
 	{
-		std::cerr << "No file to open" << std::endl;
+		std::cerr << *av << ": No file to open." << std::endl;
 		return 1;
 	}
 	if (!in)
 	{
-		std::cerr << "Could not open " << av[1] << std::endl;
+		std::cerr << *av << ": Could not open " << av[1] << "." << std::endl;
 		return 1;
 	}
 	outname.assign(av[1]);
@@ -72,7 +78,7 @@ int main(int ac, char *av[])
 	out.open(outname.c_str(), std::ofstream::out | std::ofstream::trunc);
 	if (!out)
 	{
-		std::cerr << "Could not open " << outname << std::endl;
+		std::cerr << *av << ": Could not open " << outname << "." << std::endl;
 		return 1;
 	}
 	if (ac < 3 || strlen(av[2]) == 0)
