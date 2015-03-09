@@ -4,7 +4,6 @@
 
 # include <iostream>
 
-
 class FragTrap
 {
 public:
@@ -19,15 +18,6 @@ public:
 	void					takeDamage(unsigned int amount);
 	void					beRepaired(unsigned int amount);
 	
-	void					(FragTrap::*vaulthunter_attacks[5])(std::string const &target);
-	// void					(FragTrap::*vaulthunter_attack)(std::string const &target);
-	void					vh_funzerker(std::string const &target);
-	void					vh_laserInferno(std::string const &target);
-	void					vh_miniontrap(std::string const &target);
-	void					vh_oneShotWonder(std::string const &target);
-	void					vh_torgueFiesta(std::string const &target);
-	void					vaulthunter_dot_exe(std::string const &target);
-	
 	std::string const		name;
 	std::string				getName(void)  const;
 	unsigned int			getHp(void)  const;
@@ -38,6 +28,15 @@ public:
 	unsigned int			getMeleeDamage(void)  const;
 	unsigned int			getRangedDamage(void)  const;
 	unsigned int			getArmorReduction(void)  const;
+	
+	void					(FragTrap::*vaulthunter_attacks[5])
+								(std::string const &target);
+	void					vh_funzerker(std::string const &target);
+	void					vh_laserInferno(std::string const &target);
+	void					vh_miniontrap(std::string const &target);
+	void					vh_oneShotWonder(std::string const &target);
+	void					vh_torgueFiesta(std::string const &target);
+	void					vaulthunter_dot_exe(std::string const &target);
 	
 private:
 	unsigned int			_hp;
@@ -52,4 +51,4 @@ private:
 
 typedef void				(FragTrap::*vh_attack)(std::string const &target);
 
-#endif
+#endif // **************************************************** FRAG_TRAP_HPP //
