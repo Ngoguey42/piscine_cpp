@@ -139,6 +139,13 @@ void				FragTrap::beRepaired(unsigned int amount)
 
 void				FragTrap::vaulthunter_dot_exe(std::string const &target)
 {
+	if (this->_mana < 25)
+	{
+		std::cout << "<FR4G-TP>"<< this->name << " doesn't have enough energy!"
+			<< std::endl;
+		return ;
+	}
+	this->_mana -= 25;
 	(this->*vaulthunter_attacks[rand() % 5])(target);
 	return ;
 }
