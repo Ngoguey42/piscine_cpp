@@ -1,50 +1,56 @@
 
 #include <iostream>
 #include <cstdlib>
-#include "SuperMutant.hpp"
+#include "PowerFist.hpp"
 
 // ************************************************************************** //
 // ****************************************************************** STATICS //
-std::string const	SuperMutant::_typeName = "Super Mutant";
-int const			SuperMutant::_baseHp = 170;
-std::string const	SuperMutant::_birthMsg = "Gaaah. Me want smash heads !";
-std::string const	SuperMutant::_deathMsg = "Aaargh ...";
+std::string const		PowerFist::_defaultName = "Power Fist";
+int const				PowerFist::_defaultDamage = 50;
+int const				PowerFist::_defaultAPCost = 8;
+std::string const		PowerFist::_defaultMsg = "* pschhh... SBAM! *";
 // STATICS ****************************************************************** //
 // ************************************************************************** //
 // ************************************************************* CONSTRUCTORS //
 
-SuperMutant::SuperMutant() :
-Enemy(SuperMutant::_baseHp, SuperMutant::_typeName)
+PowerFist::PowerFist() :
+AWeapon(PowerFist::_defaultName, PowerFist::_defaultAPCost,
+	PowerFist::_defaultDamage)
 {
-	std::cout << SuperMutant::_birthMsg << std::endl;
+	std::cout << "[PowerFist]() constructor called!" << std::endl;
+	this->_msg = PowerFist::_defaultMsg;
 	return ;
 }
 
-SuperMutant::SuperMutant(SuperMutant const & src) :
-Enemy(src.getHp(), src.getType())
+PowerFist::PowerFist(PowerFist const &src) :
+AWeapon(src.getName(), src.getAPCost(), src.getDamage())
 {
-	std::cout << "[SuperMutant](src) constructor called!" << std::endl;
+	std::cout << "[PowerFist](src) constructor called!" << std::endl;
+	this->_msg = src.getMsg();
 	return ;
 }
+
 // CONSTRUCTORS ************************************************************* //
 // ************************************************************************** //
 // ************************************************************** DESTRUCTORS //
-SuperMutant::~SuperMutant()
+PowerFist::~PowerFist()
 {
-	std::cout << SuperMutant::_deathMsg << std::endl;
+	std::cout << "~[PowerFist]() destructor called!" << std::endl;
 	return ;
 }
 // DESTRUCTORS ************************************************************** //
 // ************************************************************************** //
 // **************************************************************** OPERATORS //
-SuperMutant		&SuperMutant::operator=(SuperMutant const &rhs)
+PowerFist				&PowerFist::operator=(PowerFist const &rhs)
 {
-	std::cout << "[SuperMutant]= called!" << std::endl;
-	this->_hp = rhs.getHp();
-	this->_type = rhs.getType();
+	std::cout << "[PowerFist]= called!" << std::endl;
+	this->_aPCost = rhs.getAPCost();
+	this->_damage = rhs.getDamage();
+	this->_name = rhs.getName();
+	this->_msg = rhs.getMsg();
 	return (*this);
 }
-// std::ostream		&operator<<(std::ostream & o, SuperMutant const & rhs)
+// std::ostream		&operator<<(std::ostream & o, PowerFist const & rhs)
 // {
 	// o << "" << std::endl;
 	// return (o);
@@ -57,19 +63,8 @@ SuperMutant		&SuperMutant::operator=(SuperMutant const &rhs)
 // ****************************************************************** SETTERS //
 // SETTERS ****************************************************************** //
 // ************************************************************************** //
-void			SuperMutant::takeDamage(int amount)
+void					PowerFist::attack(void) const
 {
-	amount -= 3;
-	std::cout << this->_type << " lost ";
-	if (amount > 0)
-	{
-		std::cout << amount;
-		this->_hp -= amount;
-		if (this->_hp < 0)
-			this->_hp = 0;
-	}
-	else
-		std::cout << 0;
-	std::cout << "hp. (" << this->_hp << ")" << std::endl;
+	std::cout << this->getMsg() << std::endl;
+	return ;
 }
- 

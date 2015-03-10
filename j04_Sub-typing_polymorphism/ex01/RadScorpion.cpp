@@ -5,10 +5,10 @@
 
 // ************************************************************************** //
 // ****************************************************************** STATICS //
-std::string const	&RadScorpion::_typeName = "RadScorpion";
+std::string const	RadScorpion::_typeName = "RadScorpion";
 int const			RadScorpion::_baseHp = 80;
-std::string const	&RadScorpion::_birthMsg = "* click click click *";
-std::string const	&RadScorpion::_deathMsg = "* SPROTCH *";
+std::string const	RadScorpion::_birthMsg = "* click click click *";
+std::string const	RadScorpion::_deathMsg = "* SPROTCH *";
 // STATICS ****************************************************************** //
 // ************************************************************************** //
 // ************************************************************* CONSTRUCTORS //
