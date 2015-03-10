@@ -8,28 +8,25 @@
 
 ClapTrap::ClapTrap() :
 name("Unknown"), _hp(100), _hpMax(100), _mana(100), _manaMax(100), _level(1),
-_meleeDamage(30), _rangedDamage(20), _armorReduction(5)
+_meleeDamage(30), _rangedDamage(20), _armorReduction(5), _class("CL4P")
 {
-	std::cout << "ClapTrap() constructor called!" <<
-		std::endl;
+	std::cout << "ClapTrap() constructor called!" << std::endl;
 	return ;
 }
 
 ClapTrap::ClapTrap(std::string const name) :
 name(name), _hp(100), _hpMax(100), _mana(100), _manaMax(100), _level(1),
-_meleeDamage(30), _rangedDamage(20), _armorReduction(5)
+_meleeDamage(30), _rangedDamage(20), _armorReduction(5), _class("CL4P")
 {
-	std::cout << "ClapTrap(name) constructor called!" <<
-		std::endl;
+	std::cout << "ClapTrap(name) constructor called!" << std::endl;
 	return ;
 }
 
 ClapTrap::ClapTrap(ClapTrap const & src) :
 name(src.name), _hp(100), _hpMax(100), _mana(100), _manaMax(100), _level(1),
-_meleeDamage(30), _rangedDamage(20), _armorReduction(5)
+_meleeDamage(30), _rangedDamage(20), _armorReduction(5), _class("CL4P")
 {
-	std::cout << "ClapTrap(src) constructor called!" <<
-		std::endl;
+	std::cout << "ClapTrap(src) constructor called!" << std::endl;
 	return ;
 }
 // CONSTRUCTORS ************************************************************ //
@@ -84,21 +81,21 @@ unsigned int		ClapTrap::getArmorReduction(void) const
 // ************************************************************************* //
 void				ClapTrap::rangedAttack(std::string const &target)
 {
-	std::cout << this->name << " ranged attacks " <<
-		target << ", for " << this->_rangedDamage << " damages!" <<
-		std::endl;
+	std::cout << "<" << this->_class << "-TP>" << this->name <<
+		" ranged attacks " << target << ", for " << this->_rangedDamage <<
+		" damages!" << std::endl;
 	(void)target;
 }
 void				ClapTrap::meleeAttack(std::string const &target)
 {
-	std::cout << this->name << " melee attacks " <<
-		target << ", for " << this->_meleeDamage << " damages!" <<
-		std::endl;
+	std::cout << "<" << this->_class << "-TP>" << this->name <<
+		" melee attacks " << target << ", for " << this->_meleeDamage <<
+		" damages!" << std::endl;
 	return ;
 }
 void				ClapTrap::takeDamage(unsigned int amount)
 {
-	std::cout << this->name;
+	std::cout << "<" << this->_class << "-TP>" << this->name;
 	if (amount <= this->_armorReduction)
 		std::cout << " resists ";
 	else
@@ -118,8 +115,8 @@ void				ClapTrap::beRepaired(unsigned int amount)
 	this->_hp += amount;
 	if (this->_hp > this->_hpMax)
 		this->_hp = this->_hpMax;
-	std::cout << this->name << " gains " << amount <<
-		" health points!" << "(" << this->_hp << "/" << this->_hpMax <<
-		")" << std::endl;
+	std::cout << "<" << this->_class << "-TP>" << this->name << " gains " <<
+		amount << " health points!" << "(" << this->_hp << "/" <<
+		this->_hpMax << ")" << std::endl;
 	return ;
 }

@@ -24,6 +24,7 @@ public:
 	void					vaulthunter_dot_exe(std::string const &target);
 	
 private:
+	void					loadDefaultStats(void);
 };
 
 typedef void				(FragTrap::*vh_attack)(std::string const &target);

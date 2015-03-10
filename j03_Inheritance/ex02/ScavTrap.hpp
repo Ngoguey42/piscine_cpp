@@ -23,6 +23,7 @@ public:
 	void					challengeNewcomer(std::string const &target);
 	
 private:
+	void					loadDefaultStats(void);
 };
 
 typedef void				(ScavTrap::*clg_attack)(std::string const &target);

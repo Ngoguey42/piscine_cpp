@@ -6,6 +6,20 @@
 // ************************************************************************* //
 // ************************************************************ CONSTRUCTORS //
 
+void				FragTrap::loadDefaultStats(void)
+{
+	this->_hp = 100;
+	this->_hpMax = 100;
+	this->_mana = 100;
+	this->_manaMax = 100;
+	this->_level = 1;
+	this->_meleeDamage = 30;
+	this->_rangedDamage = 20;
+	this->_armorReduction = 5;
+	this->_class = "FR4G";
+	return ;
+}
+
 static void			fill_func_tab(vh_attack attacks[5])
 {
 	attacks[0] = &FragTrap::vh_funzerker; 
@@ -22,6 +36,7 @@ FragTrap::FragTrap() :
 	std::cout << "Constructor called, Let's get this party started!" <<
 		std::endl;
 	fill_func_tab(this->vaulthunter_attacks);
+	this->loadDefaultStats();
 	return ;
 }
 
@@ -31,6 +46,7 @@ FragTrap::FragTrap(std::string const name) :
 	std::cout << "Constructor(name) called, Recompiling my combat code!" <<
 		std::endl;
 	fill_func_tab(this->vaulthunter_attacks);
+	this->loadDefaultStats();
 	return ;
 }
 
@@ -40,6 +56,7 @@ FragTrap::FragTrap(FragTrap const & src) :
 	std::cout << "Constructor(copy) called, Check out my package!" <<
 		std::endl;
 	fill_func_tab(this->vaulthunter_attacks);
+	this->loadDefaultStats();
 	return ;
 }
 // CONSTRUCTORS ************************************************************ //
@@ -76,35 +93,30 @@ void				FragTrap::vaulthunter_dot_exe(std::string const &target)
 void				FragTrap::vh_funzerker(std::string const &target)
 {
 	std::cout << "<FR4G-TP>"<< this->name << " uses Funzerker on " <<
-		target << ", for " << this->_meleeDamage << " damages!" <<
-		std::endl;
+		target << ", for " << this->_meleeDamage << " damages!" << std::endl;
 	return ;
 }
 void				FragTrap::vh_laserInferno(std::string const &target)
 {
 	std::cout << "<FR4G-TP>"<< this->name << " uses Laser Inferno on " <<
-		target << ", for " << this->_rangedDamage << " damages!" <<
-		std::endl;
+		target << ", for " << this->_rangedDamage << " damages!" << std::endl;
 	return ;
 }
 void				FragTrap::vh_miniontrap(std::string const &target)
 {
 	std::cout << "<FR4G-TP>"<< this->name << " uses Miniontrap on " <<
-		target << ", for " << this->_meleeDamage << " damages!" <<
-		std::endl;
+		target << ", for " << this->_meleeDamage << " damages!" << std::endl;
 	return ;
 }
 void				FragTrap::vh_oneShotWonder(std::string const &target)
 {
 	std::cout << "<FR4G-TP>"<< this->name << " uses One Shot Wonder on " <<
-		target << ", for " << this->_rangedDamage << " damages!" <<
-		std::endl;
+		target << ", for " << this->_rangedDamage << " damages!" << std::endl;
 	return ;
 }
 void				FragTrap::vh_torgueFiesta(std::string const &target)
 {
 	std::cout << "<FR4G-TP>"<< this->name << " uses Torgue Fiesta on " <<
-		target << ", for " << this->_rangedDamage << " damages!" <<
-		std::endl;
+		target << ", for " << this->_rangedDamage << " damages!" << std::endl;
 	return ;
 }

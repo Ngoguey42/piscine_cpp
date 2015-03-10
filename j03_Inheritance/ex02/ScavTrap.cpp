@@ -6,6 +6,20 @@
 // ************************************************************************* //
 // ************************************************************ CONSTRUCTORS //
 
+void				ScavTrap::loadDefaultStats(void)
+{
+	this->_hp = 100;
+	this->_hpMax = 100;
+	this->_mana = 50;
+	this->_manaMax = 50;
+	this->_level = 1;
+	this->_meleeDamage = 20;
+	this->_rangedDamage = 15;
+	this->_armorReduction = 3;
+	this->_class = "SC4V";
+	return ;
+}
+
 static void			fill_func_tab(clg_attack attacks[4])
 {
 	attacks[0] = &ScavTrap::clg_comeback; 
@@ -21,6 +35,7 @@ ScavTrap::ScavTrap() :
 	std::cout << "Constructor called, Scav operational." <<
 		std::endl;
 	fill_func_tab(this->challenges);
+	this->loadDefaultStats();
 	return ;
 }
 
@@ -30,6 +45,7 @@ ScavTrap::ScavTrap(std::string const name) :
 	std::cout << "Constructor(name) called, Scav ready to fight!" <<
 		std::endl;
 	fill_func_tab(this->challenges);
+	this->loadDefaultStats();
 	return ;
 }
 
@@ -39,6 +55,7 @@ ScavTrap::ScavTrap(ScavTrap const & src) :
 	std::cout << "Constructor(copy) called, Scav ready to guard!" <<
 		std::endl;
 	fill_func_tab(this->challenges);
+	this->loadDefaultStats();
 	return ;
 }
 // CONSTRUCTORS ************************************************************ //

@@ -12,7 +12,7 @@ public:
 	ClapTrap(std::string const name);
 	~ClapTrap();
 	ClapTrap				&operator=(ClapTrap const &rhs);
-	
+
 	void					rangedAttack(std::string const &target);
 	void					meleeAttack(std::string const &target);
 	void					takeDamage(unsigned int amount);
@@ -38,6 +38,7 @@ protected:
 	unsigned int			_meleeDamage;
 	unsigned int			_rangedDamage;
 	unsigned int			_armorReduction;
+	std::string				_class;
 };
 
 #endif // **************************************************** CLAP_TRAP_HPP //
