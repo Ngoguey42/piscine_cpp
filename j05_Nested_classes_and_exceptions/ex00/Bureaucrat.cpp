@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/13 10:50:43 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/13 15:57:10 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/03/13 16:19:01 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -20,13 +20,6 @@ const int					Bureaucrat::lowestGrade = 150;
 // * STATICS *** STATICS **************************************************** //
 // ************************************************************************** //
 // ****************************************** CONSTRUCTORS *** CONSTRUCTORS * //
-Bureaucrat::Bureaucrat() :
-	_name("NoName"), _grade(Bureaucrat::lowestGrade)
-{
-	std::cout << "[Bureaucrat]() Ctor called" << std::endl;
-	return ;
-}
-
 Bureaucrat::Bureaucrat(std::string const &name, int startGrade) :
 	_name(name), _grade(startGrade)
 {
@@ -77,13 +70,6 @@ Bureaucrat::GradeTooLowException::~GradeTooLowException() throw()
 // * DESTRUCTORS *** DESTRUCTORS ******************************************** //
 // ************************************************************************** //
 // ************************************************ OPERATORS *** OPERATORS * //
-Bureaucrat					&Bureaucrat::operator=(Bureaucrat const &rhs)
-{
-	std::cout << "[Bureaucrat]= Overload called" << std::endl;
-	this->_grade = rhs.getGrade();
-	return (*this);
-}
-
 std::ostream				&operator<<(std::ostream &o, Bureaucrat const &rhs)
 {
 	o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << ".";
