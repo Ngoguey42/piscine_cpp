@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/13 10:50:43 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/13 15:11:53 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/03/13 15:57:10 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -24,13 +24,6 @@ Bureaucrat::Bureaucrat() :
 	_name("NoName"), _grade(Bureaucrat::lowestGrade)
 {
 	std::cout << "[Bureaucrat]() Ctor called" << std::endl;
-	return ;
-}
-
-Bureaucrat::Bureaucrat(Bureaucrat const &src) :
-	_name(src.getName()), _grade(src.getGrade())
-{
-	std::cout << "[Bureaucrat](cpy) Ctor called" << std::endl;
 	return ;
 }
 
@@ -52,27 +45,11 @@ Bureaucrat::GradeTooHighException::GradeTooHighException() throw() :
 	std::cout << "[GradeTooHighException]() Ctor called" << std::endl;
 	return ;
 }
-Bureaucrat::GradeTooHighException::GradeTooHighException
-(Bureaucrat::GradeTooHighException const &src) throw() :
-	std::exception()
-{
-	std::cout << "[GradeTooHighException](cpy) Ctor called" << std::endl;
-	(void)src;
-	return ;
-}
 
 Bureaucrat::GradeTooLowException::GradeTooLowException() throw() :
 	std::exception()
 {
 	std::cout << "[GradeTooLowException]() Ctor called" << std::endl;
-	return ;
-}
-Bureaucrat::GradeTooLowException::GradeTooLowException
-(Bureaucrat::GradeTooLowException const &src) throw() :
-	std::exception()
-{
-	std::cout << "[GradeTooLowException](cpy) Ctor called" << std::endl;
-	(void)src;
 	return ;
 }
 
@@ -112,24 +89,6 @@ std::ostream				&operator<<(std::ostream &o, Bureaucrat const &rhs)
 	o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << ".";
 	return (o);
 }
-
-// * NESTED-CLASSES ***************** //
-Bureaucrat::GradeTooHighException	&Bureaucrat::GradeTooHighException::operator=
-						(GradeTooHighException const &rhs) throw()
-{
-	std::cout << "[GradeTooHighException]= Overload called" << std::endl;
-	(void)rhs;
-	return (*this);
-}
-Bureaucrat::GradeTooLowException	&Bureaucrat::GradeTooLowException::operator=
-						(GradeTooLowException const &rhs) throw()
-{
-	std::cout << "[GradeTooLowException]= Overload called" << std::endl;
-	(void)rhs;
-	return (*this);
-}
-
-
 
 // * OPERATORS *** OPERATORS ************************************************ //
 // ************************************************************************** //
