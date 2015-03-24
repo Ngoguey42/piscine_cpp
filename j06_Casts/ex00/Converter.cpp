@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/24 08:45:05 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/24 11:01:44 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/03/24 11:33:17 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -18,16 +18,19 @@
 // ************************* CONSTRUCTORS *** CONSTRUCTORS *** CONSTRUCTORS * //
 Converter::Converter(std::string const &str) :
 	_ref(str),
+	_asChar(0),
+	_asInt(0),
+	_asFloat(0.),
+	_asDouble(0.),
 	_mainType(0)
 {
 	this->_mainType = this->detectCharMainType();
 	if (this->_mainType == 0)
 		this->_mainType = this->detectIntMainType();
-	// if (this->_mainType == 0)
-	// 	this->_mainType = this->detectMainType();
-	// if (this->_mainType == 0)
-	// 	this->_mainType = this->detectMainType();
+	if (this->_mainType == 0)
+		this->_mainType = this->detectFloatDoubleMainType();
 	std::cout << this->_mainType << std::endl;
+	// if (this->_mainType)
 	
 	return ;
 }
@@ -80,13 +83,14 @@ int							Converter::detectCharMainType()
 		}
 		if (nbr > 0x7F)
 			return (0);
-		this->_involvedInteger = nbr;
+		this->_asChar = static_cast<char>(nbr);
 		if (hexa)
 			return (4);
 		return (3);
 	}
 	return (0);
 }
+
 int							Converter::detectIntMainType()
 {
 	int				type = 5;
@@ -122,7 +126,6 @@ int							Converter::detectIntMainType()
 		(type == 5 && std::strspn(cpy.c_str(), "0123456789") !=
 		 cpy.length()))
 		return (0);
-	std::cout << "sign:" << sign << "mult:" << multiplier << std::endl;
 	while (cpy[0] != '\0')
 	{
 		curNbr = convertCharToNumber(cpy[0]);
@@ -135,7 +138,31 @@ int							Converter::detectIntMainType()
 		nbr = nbr * multiplier + sign * curNbr;
 		cpy = cpy.substr(1);
 	}
-	this->_involvedInteger = nbr;
+	this->_asInt = nbr;
+	return (type);
+}
+int							Converter::detectFloatDoubleMainType()
+{
+	int				type = 11;
+	std::string		cpy(this->_ref);
+
+	std::cout << *cpy.cend() << std::endl;
+	
+	if (cpy == "nan" || cpy == "+inf" || cpy == "-inf")
+		return (10);
+	else if (cpy == "nanf" || cpy == "+inff" || cpy == "-inff")
+		return (8);
+	if (*cpy.cend() == 'f')
+	{
+		type -= 2;
+		cpy.resize(cpy.length() - 1);
+	}
+	if (cpy.find('.') == std::string::npos ||
+		cpy.find_first_of('.') != cpy.find_last_of('.'))
+		return (0);
+	if (cpy.find_first_not_of("0123456789", 1) != std::string::npos ||
+		cpy.find_first_not_of("0123456789+-") != std::string::npos)
+		return (0);
 	return (type);
 }
 
