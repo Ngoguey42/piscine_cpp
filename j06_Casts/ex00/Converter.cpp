@@ -6,10 +6,12 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/24 08:45:05 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/24 12:23:32 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/03/24 13:58:28 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
+#include <sstream>
+#include <cmath>
 #include <limits>
 #include <string>
 #include "Converter.hpp"
@@ -61,7 +63,7 @@ int							Converter::detectCharMainType()
 		this->_asChar = this->_ref[0];
 		return (std::isdigit(this->_ref[0]) ? 0 : 1);
 	}
-		else if (this->_ref.length() == 2 && this->_ref[0] == '\\' && 
+	else if (this->_ref.length() == 2 && this->_ref[0] == '\\' && 
 			 std::strspn(this->_ref.c_str(), "abfnrtv\\\'\"\?") == 2)
 	{
 		if (this->_ref == "\\a")
@@ -174,10 +176,37 @@ int							Converter::detectFloatDoubleMainType()
 	int				type = 11;
 	std::string		cpy(this->_ref);
 
-	if (cpy == "nan" || cpy == "+inf" || cpy == "-inf")
+	
+	if (cpy == "nan"|| cpy == "NAN")
+	{
+		this->_asDouble = NAN;
 		return (10);
-	else if (cpy == "nanf" || cpy == "+inff" || cpy == "-inff")
+	}
+	if (cpy == "nanf"|| cpy == "NANf")
+	{
+		this->_asFloat = NAN;
 		return (8);
+	}
+	if (cpy == "+inf"|| cpy == "+INF")
+	{
+		this->_asDouble = 1./0.;
+		return (10);
+	}
+	if (cpy == "+inff"|| cpy == "+INFf")
+	{
+		this->_asFloat = 1./0.;
+		return (8);
+	}
+	if (cpy == "-inf"|| cpy == "-INF")
+	{
+		this->_asDouble = -1./0.;
+		return (10);
+	}
+	if (cpy == "-inff"|| cpy == "-INFf")
+	{
+		this->_asFloat = -1./0.;
+		return (8);
+	}
 	if (cpy[cpy.length() - 1] == 'f')
 	{
 		type -= 2;
@@ -189,12 +218,25 @@ int							Converter::detectFloatDoubleMainType()
 	if (cpy.find_first_not_of("0123456789.", 1) != std::string::npos ||
 		cpy.find_first_not_of("0123456789.+-") != std::string::npos)
 		return (0);
-	
+	if (type == 11)
+		detectDouble(cpy);
+	else
+		detectFloat(cpy);
 	return (type);
 }
 
 void						Converter::detectFloat(std::string cpy)
 {
+	std::istringstream	iss;
+
+	iss.str(cpy);
+	iss.clear();
+	iss >> this->_asFloat;
+
+	if (iss.fail())
+		std::cout << "fail" << std::endl;
+	else
+		std::cout << "ok:" << this->_asFloat << std::endl;	
 	(void)cpy;
 	return ;
 }
@@ -203,7 +245,6 @@ void						Converter::detectDouble(std::string cpy)
 	(void)cpy;
 	return ;
 }
-
 
 void						Converter::describeAsChar(void)
 {
