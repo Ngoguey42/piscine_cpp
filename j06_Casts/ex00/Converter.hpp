@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/24 08:37:50 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/24 10:06:15 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/03/24 10:20:34 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -34,13 +34,14 @@ private:
 /*
 ** 0none
 ** 1char letter, 2char escape letter, 3char escape octal, 4char escape hex
-** 2int
+** 5int decimal, 6 int octal, 7 int hexadecimal
 ** 3
 ** 
 */	
 	int							_involvedInteger;
 
 	int							detectCharMainType(void);
+	int							detectIntMainType(void);
 
 	Converter();
 	Converter(Converter const &src);
