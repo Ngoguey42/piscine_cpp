@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/24 08:45:05 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/24 11:33:17 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/03/24 12:23:32 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -57,10 +57,38 @@ static int					convertCharToNumber(char c)
 int							Converter::detectCharMainType()
 {
 	if (this->_ref.length() == 1 && std::isprint(this->_ref[0]))
+	{
+		this->_asChar = this->_ref[0];
 		return (std::isdigit(this->_ref[0]) ? 0 : 1);
-	else if (this->_ref.length() == 2 && this->_ref[0] == '\\' && 
+	}
+		else if (this->_ref.length() == 2 && this->_ref[0] == '\\' && 
 			 std::strspn(this->_ref.c_str(), "abfnrtv\\\'\"\?") == 2)
+	{
+		if (this->_ref == "\\a")
+			this->_asChar = '\a';
+		else if (this->_ref == "\\b")
+			this->_asChar = '\b';
+		else if (this->_ref == "\\f")
+			this->_asChar = '\f';
+		else if (this->_ref == "\\n")
+			this->_asChar = '\n';
+		else if (this->_ref == "\\r")
+			this->_asChar = '\r';
+		else if (this->_ref == "\\t")
+			this->_asChar = '\t';
+		else if (this->_ref == "\\v")
+			this->_asChar = '\v';
+		else if (this->_ref == "\\\\")
+			this->_asChar = '\\';
+		else if (this->_ref == "\\\'")
+			this->_asChar = '\'';
+		else if (this->_ref == "\\\"")
+			this->_asChar = '\"';
+		else if (this->_ref == "\\?")
+			this->_asChar = '\?';
 		return (2);
+	}
+
 	else if (this->_ref.length() > 1 && this->_ref[0] == '\\')
 	{
 		std::string		cpy(this->_ref.substr(1));
@@ -133,7 +161,7 @@ int							Converter::detectIntMainType()
 			std::numeric_limits<int>::min() - nbr * multiplier + curNbr > 0)
 			return (0);
 		else if (sign == 1 &&
-			std::numeric_limits<int>::max() - nbr * multiplier - curNbr < 0)
+				 std::numeric_limits<int>::max() - nbr * multiplier - curNbr < 0)
 			return (0);
 		nbr = nbr * multiplier + sign * curNbr;
 		cpy = cpy.substr(1);
@@ -146,13 +174,11 @@ int							Converter::detectFloatDoubleMainType()
 	int				type = 11;
 	std::string		cpy(this->_ref);
 
-	std::cout << *cpy.cend() << std::endl;
-	
 	if (cpy == "nan" || cpy == "+inf" || cpy == "-inf")
 		return (10);
 	else if (cpy == "nanf" || cpy == "+inff" || cpy == "-inff")
 		return (8);
-	if (*cpy.cend() == 'f')
+	if (cpy[cpy.length() - 1] == 'f')
 	{
 		type -= 2;
 		cpy.resize(cpy.length() - 1);
@@ -160,27 +186,93 @@ int							Converter::detectFloatDoubleMainType()
 	if (cpy.find('.') == std::string::npos ||
 		cpy.find_first_of('.') != cpy.find_last_of('.'))
 		return (0);
-	if (cpy.find_first_not_of("0123456789", 1) != std::string::npos ||
-		cpy.find_first_not_of("0123456789+-") != std::string::npos)
+	if (cpy.find_first_not_of("0123456789.", 1) != std::string::npos ||
+		cpy.find_first_not_of("0123456789.+-") != std::string::npos)
 		return (0);
+	
 	return (type);
 }
 
+void						Converter::detectFloat(std::string cpy)
+{
+	(void)cpy;
+	return ;
+}
+void						Converter::detectDouble(std::string cpy)
+{
+	(void)cpy;
+	return ;
+}
 
-void						Converter::describeAsChar(void) const
+
+void						Converter::describeAsChar(void)
 {
+	std::cout << "char: ";
+	if (this->_mainType == 0 || this->_mainType >= 8 ||
+		(this->_mainType >= 5 && (this->_asInt < 0 || this->_asInt > 0177)))
+		std::cout << "impossible" << std::endl;
+	else
+	{
+		if (this->_mainType >= 5)
+			this->_asChar = static_cast<char>(this->_asInt);
+		if (this->_asChar >= ' ' && this->_asChar <= '~')
+			std::cout << this->_asChar << std::endl;
+		else
+		{
+			std::cout << "'";
+			if (this->_asChar == '\a')
+				std::cout << "\\a";
+			else if (this->_asChar == '\b')
+				std::cout << "\\b";
+			else if (this->_asChar == '\f')
+				std::cout << "\\f";
+			else if (this->_asChar == '\n')
+				std::cout << "\\n";
+			else if (this->_asChar == '\r')
+				std::cout << "\\r";
+			else if (this->_asChar == '\t')
+				std::cout << "\\t";
+			else if (this->_asChar == '\v')
+				std::cout << "\\v";
+			else if (this->_asChar == '\\')
+				std::cout << "\\\\";
+			else if (this->_asChar == '\'')
+				std::cout << "\\'";
+			else if (this->_asChar == '\"')
+				std::cout << "\\\"";
+			else if (this->_asChar == '\?')
+				std::cout << "\\?";
+			else
+				std::cout << '\\' << std::oct << (int)this->_asChar;
+			std::cout << "'" << std::endl;
+		}
+	}
 	return ;
 }
-void						Converter::describeAsInt(void) const
+void						Converter::describeAsInt(void)
 {
+	std::cout << "int: ";
+	if (this->_mainType <= 4)
+		this->_asInt = static_cast<int>(this->_asChar);
+	if (this->_mainType >= 8)
+		std::cout << "impossible";
+	else
+		std::cout << std::dec << this->_asInt;
+	std::cout << std::endl;
 	return ;
 }
-void						Converter::describeAsFloat(void) const
+void						Converter::describeAsFloat(void)
 {
+	std::cout << "float: ";
+	
+	std::cout << std::endl;
 	return ;
 }
-void						Converter::describeAsDouble(void) const
+void						Converter::describeAsDouble(void)
 {
+	std::cout << "double: ";
+	
+	std::cout << std::endl;
 	return ;
 }
 

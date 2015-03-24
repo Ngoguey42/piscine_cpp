@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/24 08:37:50 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/24 11:12:24 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/03/24 12:00:42 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -22,10 +22,10 @@ class Converter
 public:
 	Converter(std::string const &src);
 	virtual ~Converter();
-	void						describeAsChar(void) const;
-	void						describeAsInt(void) const;
-	void						describeAsFloat(void) const;
-	void						describeAsDouble(void) const;
+	void						describeAsChar(void);
+	void						describeAsInt(void);
+	void						describeAsFloat(void);
+	void						describeAsDouble(void);
 	
 protected:
 private:
@@ -36,17 +36,20 @@ private:
 	double						_asDouble;
 	int							_mainType;
 /*
+** abfnrtv\\\'\"\?
 ** 0none
 ** 1char letter, 2char escape letter, 3char escape octal, 4char escape hex
 ** 5int decimal, 6 int octal, 7 int hexadecimal
 ** 8txt float, 9nbr float
-** 10txt double, 10nbr double
+** 10txt double, 11nbr double
 */	
 
 	int							detectCharMainType(void);
 	int							detectIntMainType(void);
 	int							detectFloatDoubleMainType(void);
-
+	void						detectFloat(std::string cpy);
+	void						detectDouble(std::string cpy);
+	
 
 	
 	Converter();

@@ -10,14 +10,23 @@ function test_it()
 test_it '~'
 test_it ' '
 test_it '\a'
+test_it '\v'
+test_it '\f'
+test_it '\"'
+test_it '"'
+test_it 'a'
+test_it '96'
+test_it 'z'
+test_it '_'
 test_it '\\'
 
-test_it '\0'
 test_it '\0'
 test_it '\177'
 
 test_it '\x0'
 test_it '\x7F'
+
+exit
 
 #integers
 test_it '-3'
@@ -42,6 +51,8 @@ test_it '+2147483647'
 test_it '0x7FFFFFFF'
 test_it '017777777777'
 
+
+
 #floatings
 test_it 'nan'
 test_it '+inf'
@@ -50,8 +61,28 @@ test_it 'nanf'
 test_it '+inff'
 test_it '-inff'
 
+test_it '.0'
+test_it '-.0'
+test_it '+.0'
+test_it '0.'
+test_it '-0.000'
+test_it '+0.00'
+test_it '0.'
+test_it '-0.'
+test_it '+0.'
+
+test_it '.0f'
+test_it '-.0f'
+test_it '+.0f'
+test_it '0.f'
+test_it '-0.000f'
+test_it '+0.00f'
+test_it '0.f'
+test_it '-0.f'
+test_it '+0.f'
 
 # limits
+
 test_it '-2147483649'
 test_it '+2147483648'
 test_it '0x80000000'
