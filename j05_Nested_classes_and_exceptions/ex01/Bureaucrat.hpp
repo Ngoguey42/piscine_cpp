@@ -1,24 +1,25 @@
 // ************************************************************************** //
 //                                                                            //
 //                                                        :::      ::::::::   //
-//   Form.hpp                                           :+:      :+:    :+:   //
+//   Bureaucrat.hpp                                     :+:      :+:    :+:   //
 //                                                    +:+ +:+         +:+     //
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
-//   Created: 2015/03/13 16:06:23 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/30 12:11:29 by ngoguey          ###   ########.fr       //
+//   Created: 2015/03/13 10:50:27 by ngoguey           #+#    #+#             //
+//   Updated: 2015/03/30 12:11:26 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef BUREAUCRAT_HPP
+# define BUREAUCRAT_HPP
 
-class Bureaucrat;
-# include "Bureaucrat.hpp"
+//# include <string>
+class Form;
 # include <iostream>
 # include <stdexcept>
+# include "Form.hpp"
 
-class Form
+class Bureaucrat
 {
 public:
 	static const int			highestGrade;
@@ -28,9 +29,9 @@ public:
 	{
 	public:
 		GradeTooHighException();
-		GradeTooHighException(GradeTooHighException const &src);
 		virtual ~GradeTooHighException() throw();
-
+		GradeTooHighException(GradeTooHighException const &src);
+		
 		virtual const char *what() const throw();
 	private:
 		GradeTooHighException& operator=(GradeTooHighException const &rhs);
@@ -39,36 +40,36 @@ public:
 	{
 	public:
 		GradeTooLowException();
-		GradeTooLowException(GradeTooLowException const &src);
 		virtual ~GradeTooLowException() throw();
+		GradeTooLowException(GradeTooLowException const &src);
 
 		virtual const char *what() const throw();
 	private:
 		GradeTooLowException& operator=(GradeTooLowException const &rhs);
 	};
 
-	virtual ~Form();
-	Form(std::string const &name, int sGrade, int eGrade)
+	virtual ~Bureaucrat();
+	Bureaucrat(std::string const &name, int startGrade)
 		throw(GradeTooHighException, GradeTooLowException);
 
-	std::string const			&getName(void) const;
-	int							getSGrade(void) const;
-	int							getEGrade(void) const;
-	bool						getIsSigned(void) const;
-
-	void						beSigned(Bureaucrat const &b)
+	void						incrementGrade(void)
+		throw(GradeTooHighException);
+	void						decrementGrade(void)
 		throw(GradeTooLowException);
+	void						signForm(Form &f);
 	
+	const std::string			&getName(void) const;
+	int							getGrade(void) const;
+
 private:
-	Form();
-	Form(Form const &src);
-	Form						&operator=(Form const &rhs);
+	Bureaucrat					&operator=(Bureaucrat const &rhs);
+	Bureaucrat(Bureaucrat const &src);
+	Bureaucrat();
 
-	std::string const			_name;
-	int const					_sGrade;
-	int const					_eGrade;
-	bool						_isSigned;
+	const std::string			_name;
+	int							_grade;
 };
-std::ostream					&operator<<(std::ostream &o, Form const &rhs);
+std::ostream					&operator<<(std::ostream &o,
+											Bureaucrat const &rhs);
 
-#endif // ********************************************************** FORM_HPP //
+#endif // **************************************************** BUREAUCRAT_HPP //
