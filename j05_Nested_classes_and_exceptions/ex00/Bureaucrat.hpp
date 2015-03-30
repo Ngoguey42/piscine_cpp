@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/13 10:50:27 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/13 15:58:15 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/03/30 10:52:20 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -20,51 +20,53 @@
 class Bureaucrat
 {
 public:
-
-	virtual ~Bureaucrat();
-	Bureaucrat					&operator=(Bureaucrat const &rhs);
-
-	Bureaucrat(std::string const &name, int startGrade);
-
 	static const int			highestGrade;
 	static const int			lowestGrade;
-
-	void						incrementGrade(void);
-	void						decrementGrade(void);
-
-	const std::string			&getName(void) const;
-	int							getGrade(void) const;
 
 	class GradeTooHighException : public std::exception
 	{
 	public:
-		GradeTooHighException() throw();
+		GradeTooHighException();
 		virtual ~GradeTooHighException() throw();
-		GradeTooHighException(GradeTooHighException const &src) throw();
+		GradeTooHighException(GradeTooHighException const &src);
 		
 		virtual const char *what() const throw();
 	private:
-		GradeTooHighException& operator=(GradeTooHighException const &rhs) throw();
+		GradeTooHighException& operator=(GradeTooHighException const &rhs);
 	};
 	class GradeTooLowException : public std::exception
 	{
 	public:
-		GradeTooLowException() throw();
+		GradeTooLowException();
 		virtual ~GradeTooLowException() throw();
-		GradeTooLowException(GradeTooLowException const &src) throw();
-		
+		GradeTooLowException(GradeTooLowException const &src);
+
 		virtual const char *what() const throw();
 	private:
-		GradeTooLowException& operator=(GradeTooLowException const &rhs) throw();
+		GradeTooLowException& operator=(GradeTooLowException const &rhs);
 	};
 
+	virtual ~Bureaucrat();
+	Bureaucrat(std::string const &name, int startGrade)
+		throw(GradeTooHighException, GradeTooLowException);
+
+	void						incrementGrade(void)
+		throw(GradeTooHighException);
+	void						decrementGrade(void)
+		throw(GradeTooLowException);
+
+	const std::string			&getName(void) const;
+	int							getGrade(void) const;
+
 private:
+	Bureaucrat					&operator=(Bureaucrat const &rhs);
 	Bureaucrat(Bureaucrat const &src);
 	Bureaucrat();
 
 	const std::string			_name;
 	int							_grade;
 };
-std::ostream					&operator<<(std::ostream &o, Bureaucrat const &rhs);
+std::ostream					&operator<<(std::ostream &o,
+											Bureaucrat const &rhs);
 
 #endif // **************************************************** BUREAUCRAT_HPP //

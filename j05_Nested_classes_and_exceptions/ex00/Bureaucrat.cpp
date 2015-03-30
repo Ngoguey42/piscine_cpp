@@ -6,48 +6,59 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/13 10:50:43 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/13 16:19:01 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/03/30 10:51:08 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #include <iostream>
 #include "Bureaucrat.hpp"
 
-// ************************************************************************** //
 // **************************************************** STATICS *** STATICS * //
 const int					Bureaucrat::highestGrade = 1;
 const int					Bureaucrat::lowestGrade = 150;
-// * STATICS *** STATICS **************************************************** //
-// ************************************************************************** //
 // ****************************************** CONSTRUCTORS *** CONSTRUCTORS * //
-Bureaucrat::Bureaucrat(std::string const &name, int startGrade) :
+Bureaucrat::Bureaucrat(std::string const &name, int startGrade)
+	throw(GradeTooHighException, GradeTooLowException) :
 	_name(name), _grade(startGrade)
 {
-	if (startGrade < Bureaucrat::highestGrade)
-		throw Bureaucrat::GradeTooHighException();
-	if (startGrade > Bureaucrat::lowestGrade)
-		throw Bureaucrat::GradeTooLowException();
 	std::cout << "[Bureaucrat](main) Ctor called" << std::endl;
-			return ;
+	if (startGrade < Bureaucrat::highestGrade)
+		throw GradeTooHighException();
+	if (startGrade > Bureaucrat::lowestGrade)
+		throw GradeTooLowException();
+	return ;
 }
 
 // * NESTED-CLASSES ***************** //
-Bureaucrat::GradeTooHighException::GradeTooHighException() throw() :
+Bureaucrat::GradeTooHighException::GradeTooHighException() :
 	std::exception()
 {
 	std::cout << "[GradeTooHighException]() Ctor called" << std::endl;
 	return ;
 }
 
-Bureaucrat::GradeTooLowException::GradeTooLowException() throw() :
+Bureaucrat::GradeTooLowException::GradeTooLowException() :
 	std::exception()
 {
 	std::cout << "[GradeTooLowException]() Ctor called" << std::endl;
 	return ;
 }
+Bureaucrat::GradeTooHighException::GradeTooHighException(
+	GradeTooHighException const &rhs) : std::exception()
+{
+	std::cout << "[GradeTooHighException](cpy) Ctor called" << std::endl;
+	(void)rhs;
+	return ;
+}
 
-// * CONSTRUCTORS *** CONSTRUCTORS ****************************************** //
-// ************************************************************************** //
+Bureaucrat::GradeTooLowException::GradeTooLowException(
+	GradeTooLowException const &rhs) : std::exception()
+{
+	std::cout << "[GradeTooLowException](cpy) Ctor called" << std::endl;
+	(void)rhs;
+	return ;
+}
+
 // ******************************************** DESTRUCTORS *** DESTRUCTORS * //
 Bureaucrat::~Bureaucrat()
 {
@@ -67,8 +78,6 @@ Bureaucrat::GradeTooLowException::~GradeTooLowException() throw()
 	return ;
 }
 
-// * DESTRUCTORS *** DESTRUCTORS ******************************************** //
-// ************************************************************************** //
 // ************************************************ OPERATORS *** OPERATORS * //
 std::ostream				&operator<<(std::ostream &o, Bureaucrat const &rhs)
 {
@@ -76,31 +85,26 @@ std::ostream				&operator<<(std::ostream &o, Bureaucrat const &rhs)
 	return (o);
 }
 
-// * OPERATORS *** OPERATORS ************************************************ //
-// ************************************************************************** //
 // **************************************************** GETTERS *** GETTERS * //
 const std::string			&Bureaucrat::getName(void) const
-	{return this->_name;}
+{return this->_name;}
 int							Bureaucrat::getGrade(void) const
-	{return this->_grade;}
+{return this->_grade;}
 
-// * GETTERS *** GETTERS **************************************************** //
-// ************************************************************************** //
-// **************************************************** SETTERS *** SETTERS * //
-// * SETTERS *** SETTERS **************************************************** //
-// ************************************************************************** //
 void						Bureaucrat::incrementGrade(void)
+	throw(GradeTooHighException)
 {
 	if (this->_grade - 1 < Bureaucrat::highestGrade)
-		throw Bureaucrat::GradeTooHighException();
+		throw GradeTooHighException();
 	this->_grade -= 1;
 	return ;
 }
 
 void						Bureaucrat::decrementGrade(void)
+	throw(GradeTooLowException)
 {
 	if (this->_grade + 1 > Bureaucrat::lowestGrade)
-		throw Bureaucrat::GradeTooLowException();
+		throw GradeTooLowException();
 	this->_grade += 1;
 	return ;
 }
