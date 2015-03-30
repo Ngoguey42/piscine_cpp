@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/30 11:58:09 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/30 12:23:39 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/03/30 13:10:00 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -76,6 +76,9 @@ int							main(void)
 	std::cout << std::endl;
 
 	test1(b, v);
+	test1(bo, v);
+	test1(b, r);
+	test1(bo, r);
 	test3();
 
 	

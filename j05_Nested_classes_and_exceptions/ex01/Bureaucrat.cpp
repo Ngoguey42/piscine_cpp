@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/13 10:50:43 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/30 12:10:09 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/03/30 13:11:41 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -116,11 +116,6 @@ void						Bureaucrat::signForm(Form &f)
 		f.beSigned(*this);
 	}
 	catch (Form::GradeTooLowException &e)
-	{
-		std::cout << this->_name << " cannot sign " << f.getName() <<
-			" because " << e.what() << std::endl;
-	}
-	catch (Form::GradeTooHighException &e)
 	{
 		std::cout << this->_name << " cannot sign " << f.getName() <<
 			" because " << e.what() << std::endl;
