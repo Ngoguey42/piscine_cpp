@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/13 16:06:23 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/30 14:33:46 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/03/31 07:27:27 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -21,9 +21,11 @@ class Bureaucrat;
 class Form
 {
 public:
+	// * STATICS ******************** //
 	static const int			highestGrade;
 	static const int			lowestGrade;
 
+	// * NESTED CLASSES ************* //
 	class GradeTooHighException : public std::exception
 	{
 	public:
@@ -58,17 +60,20 @@ public:
 		FormNotSignedException& operator=(FormNotSignedException const &rhs);
 	};
 
-	virtual ~Form();
+	// * STATICS ******************** //
 	Form(std::string const &name, int sGrade, int eGrade,
 		 std::string const &target)
 		throw(GradeTooHighException, GradeTooLowException);
+	virtual ~Form();
 
+	// * GETTERS / SETTERS ********** //
 	std::string const			&getName(void) const;
 	int							getSGrade(void) const;
 	int							getEGrade(void) const;
 	bool						getIsSigned(void) const;
 	std::string const			&getTarget(void) const;
-	
+
+	// * MEMBER FUNCTIONS / METHODS * //
 	void						beSigned(Bureaucrat const &b)
 		throw(GradeTooLowException);
 	virtual void				tryExecute(Bureaucrat const &executor) const
@@ -81,6 +86,7 @@ private:
 	Form(Form const &src);
 	Form						&operator=(Form const &rhs);
 
+	// * ATTRIBUTES ***************** //
 	std::string const			_name;
 	int const					_sGrade;
 	int const					_eGrade;

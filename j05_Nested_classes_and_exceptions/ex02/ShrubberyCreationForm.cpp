@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/30 15:24:30 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/30 15:43:43 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/03/31 06:51:53 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -38,22 +38,28 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 void						ShrubberyCreationForm::execute(
 	Bureaucrat const &executor) const
 {
-	std::string		filename(this->getTarget());
+	std::string		filename("./");
 	std::ofstream	ofs;
 
+	filename += this->getTarget();
 	filename += "_shrubbery";
-	filename = "/";
-	try
+	ofs.open(filename.c_str(), std::ofstream::out | std::ofstream::trunc);
+	if (ofs.fail())
 	{
-		ofs.open(filename.c_str(), std::ofstream::out | std::ofstream::trunc);
-		ofs << "bordel";
-		std::cout << filename << std::endl;
+		std::cout << "Error openning " << filename << std::endl;
+		return ;
 	}
-	catch (std::exception &e)
-	// catch (std::ofstream::failure &e)
+	ofs <<
+		"  xxxxx xxxxxxxxx xxxx xxxxxxxxxx xx" << std::endl <<
+		"   YYY   YYYYYYY   YY   YYYYYYY   YY" << std::endl <<
+		"   ---   -------   --   -------   --" << std::endl <<
+		"    |       ||     ||     |||     ||" << std::endl <<
+		"    |       ||     ||     |||     ||" << std::endl <<
+		"    |       ||     ||     |||     ||" << std::endl;
+	if (ofs.fail())
 	{
-		std::cout << "Error handling " << filename << ": " <<
-			e.what() << std::endl;
+		std::cout << "Error writting in  " << filename << std::endl;
+		return ;
 	}
 	(void)executor;
 	return ;
