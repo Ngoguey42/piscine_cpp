@@ -1,3 +1,6 @@
 [submodule "rush00"]
 	path = rush00
 	url = https://github.com/Ngoguey42/ft_retro
+[submodule "rush01"]
+	path = rush01
+	url = https://github.com/Ngoguey42/ft_gkrellm
