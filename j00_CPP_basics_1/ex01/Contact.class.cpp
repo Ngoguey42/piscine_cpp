@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Contact.class.cpp                                  :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/06 11:47:16 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/06 12:04:08 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <Contact.class.hpp>
 #include <iostream>
@@ -20,8 +31,17 @@ const char			*Contact::_entriesNames[11] =
 	"Birthday Date",
 	"Favorite Meal",
 	"Underwear Color",
-	"Darkest Secret",
+	"Darkest Secret"
 };
+
+static std::string	Cell(std::string String)
+{
+	const size_t	len = String.length();
+
+	if (len <= 10)
+		return (String.insert(0, 10 - len, ' '));
+	return (String.replace(9, len - 9, "."));
+}
 
 void				Contact::initInstance(void)
 {
@@ -29,7 +49,7 @@ void				Contact::initInstance(void)
 	for (int i = 0; i < 11; i++)
 	{
 		std::cout << "Please input your " << Contact::_entriesNames[i] << ": ";
-		std::cin >> this->_entries[i];
+		std::getline(std::cin, this->_entries[i]);
 		if (std::cin.eof())
 		{
 			std::cout << std::endl;
@@ -40,14 +60,6 @@ void				Contact::initInstance(void)
 	return ;
 }
 
-static std::string	Cell(std::string String)
-{
-	const size_t	len = String.length();
-
-	if (len <= 10)
-		return (String.insert(0, 10 - len, ' '));
-	return (String.replace(9, len - 9, "."));
-}
 
 void				Contact::selfDecribe_Row(void)
 {
@@ -61,7 +73,7 @@ void				Contact::selfDecribe_Row(void)
 void				Contact::selfDecribe_Full(void)
 {
 	for (int i = 0; i < 11; i++)
-		std::cout <<  Contact::_entriesNames[i] << ": " << this->_entries[i] <<
-			std::endl;
+		std::cout <<  Contact::_entriesNames[i] << ": '" << this->_entries[i] <<
+			'\'' << std::endl;
 	return ;
 }

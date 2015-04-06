@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   main.cpp                                           :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/06 11:47:28 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/06 12:05:13 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <Contact.class.hpp>
 #include <iostream>
@@ -22,7 +33,7 @@ static int	request_index(void)
 	do
 	{
 		std::cout << "Who should I look into: ";
-		std::cin >> buf;
+		std::getline(std::cin, buf);
 		if (std::cin.eof())
 		{
 			std::cout << std::endl;
@@ -61,17 +72,17 @@ int			main(void)
 	while (1)
 	{
 		std::cout << "> ";
-		std::cin >> buf;
+		std::getline(std::cin, buf);
 		if (std::cin.eof())
 		{
 			std::cout << std::endl;
 			break ;
 		}
-		if (buf.compare("ADD") == 0)
+		if (buf == "ADD")
 			add_requested(contacts);
-		else if (buf.compare("SEARCH") == 0)
+		else if (buf == "SEARCH")
 			search_requested(contacts);
-		else if (buf.compare("EXIT") == 0)
+		else if (buf == "EXIT")
 			break ;
 		else
 			std::cout << "Input discarded." << std::endl;
