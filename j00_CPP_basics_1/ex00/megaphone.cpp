@@ -1,44 +1,38 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   megaphone.cpp                                      :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/06 11:33:02 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/06 11:41:20 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <iostream>
 
-static char	format_char(char c)
+static char		format_char(char c)
 {
 	if (c >= 'a' && c <= 'z')
 		return (c - 'a' + 'A');
 	return (c);
 }
 
-static void	format_string(char *str)
+static void		format_string(char *str)
 {
-	const char	*head = str;
-	const char	*orig = str;
-
-	while (*head == ' ')
-		head++;
-	while (*head != '\0')
-		*str++ = format_char(*head++);
-	do
-	{
-		*str-- = '\0';
-	} while(str >= orig && *str == ' ');
+	for (;*str != '\0';str++)
+		*str = format_char(*str);
 	return ;
 }
 
 int			main(int ac, char *av[])
 {
-	int		t = 0;
-
 	if (ac < 2)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
 	for (av++; --ac; av++)
-	{
+	{	
 		format_string(*av);
-		if (**av == '\0')
-			continue ;
-		else if (t)
-			std::cout << ' ';
-		else
-			t = 1;
 		std::cout << *av;
 	}
 	std::cout << std::endl;

@@ -5,7 +5,7 @@ SRCSFILES = megaphone.cpp
 
 SRCPATH = .
 OBJPATH = obj
-CC = g++
+CC = clang++
 CFLAGS = -Werror -Wall -Wextra
 RM = rm -rf
 
@@ -16,7 +16,7 @@ all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	$(CC) -o $@ $(CFLAGS) $(OBJECTS)
-	
+
 $(OBJECTS): $(OBJPATH)/%.o : $(SRCPATH)/%.cpp
 	@mkdir -p $(dir $@)
 	$(CC) -o $@ $(CFLAGS) -c $<
