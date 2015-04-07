@@ -1,14 +1,26 @@
-
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   main.cpp                                           :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/07 12:52:04 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/07 13:02:38 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include "ZombieEvent.hpp"
 #include "Zombie.hpp"
 #include <iostream>
+#include <cstdlib>
 
 int			main(void)
 {
 	ZombieEvent		event;
 	Zombie			*ptr;
 
+	srand(time(NULL));
 	std::cout << "main: event.setZombieType(\"Boomer\")" << std::endl;
 	event.setZombieType("Boomer");
 	std::cout << std::endl;

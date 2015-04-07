@@ -1,8 +1,19 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   main.cpp                                           :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/07 12:40:26 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/07 12:47:47 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include "Pony.hpp"
 #include <iostream>
 
-void	ponyOnTheHeap(int height, std::string name)
+void	ponyOnTheHeap(int height, std::string const &name)
 {
 	std::cout << "Entering on the heap!!" << std::endl;
 	Pony	*p = new Pony(height, name);
@@ -14,7 +25,7 @@ void	ponyOnTheHeap(int height, std::string name)
 	return ;
 }
 
-void	ponyOnTheStack(int height, std::string name)
+void	ponyOnTheStack(int height, std::string const &name)
 {
 	std::cout << "Entering on the stack!!" << std::endl;
 	Pony	p = Pony(height, name);
