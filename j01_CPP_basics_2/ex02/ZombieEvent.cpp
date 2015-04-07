@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/07 12:54:39 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/07 13:28:33 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/07 13:32:53 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -44,7 +44,7 @@ Zombie		*ZombieEvent::newZombie(std::string const &name)
 static void	chump(std::string const &type)
 {
 	Zombie		z(
-		Zombie::default_names[(std::rand() + std::time(0)) %
+		Zombie::default_names[(std::rand()) %
 							  (sizeof(Zombie::default_names) /
 							   sizeof(*Zombie::default_names))], 
 		type
