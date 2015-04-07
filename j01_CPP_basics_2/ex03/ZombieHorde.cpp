@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   ZombieHorde.cpp                                    :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/07 13:45:45 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/07 13:46:25 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include "ZombieHorde.hpp"
 #include "Zombie.hpp"
@@ -19,8 +30,7 @@ ZombieHorde::~ZombieHorde(void)
 void		ZombieHorde::announce(void)
 {
 	for (int i = 0; i < this->_len; i++)
-	{
 		this->_zombies[i].announce();
-	}
 	return ;
 }
+
