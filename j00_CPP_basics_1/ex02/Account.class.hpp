@@ -45,7 +45,7 @@ private:
 	int				_amount;
 	int				_nbDeposits;
 	int				_nbWithdrawals;
-
+	
 	Account( void );
 
 };

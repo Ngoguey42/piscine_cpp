@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/07 07:41:48 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/07 08:25:25 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/07 08:49:31 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -21,12 +21,13 @@ int							Account::_totalNbDeposits = 0;
 int							Account::_totalNbWithdrawals = 0;
 void						Account::_displayTimestamp(void)
 {
-	time_t		t = time(NULL);
+	time_t		t;
 	char		buf[100];
 	size_t		s;
 	std::string	buf2;
 
-	s = strftime(buf, 100, "%Y%m%d_%H%I%M", localtime(&t));
+	time(&t);
+	s = strftime(buf, 100, "%Y%m%d_%H%M%S", localtime(&t));
 	buf2.assign(buf, s);
 	std::cout << '[' << buf2 << ']';
 	// std::cout << "[20150406_153629]";
@@ -66,6 +67,8 @@ Account::Account(int initial_deposit) :
 	_amount(initial_deposit),
 	_nbDeposits(0),
 	_nbWithdrawals(0)
+	// bonus:
+	// ,_nbCheckAmount(0)
 {
 	Account::_displayTimestamp();
 	std::cout << " index:" << this->_accountIndex <<
@@ -125,6 +128,8 @@ bool						Account::makeWithdrawal(int withdrawal)
 }
 int							Account::checkAmount(void) const
 {
+	//bonus:
+	// this->_nbCheckAmount++;
 	return (this->_amount);
 }
 void						Account::displayStatus(void) const
