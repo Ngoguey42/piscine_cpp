@@ -1,8 +1,17 @@
-
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   main.cpp                                           :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/07 14:28:34 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/07 14:40:45 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <fstream>
 #include <iostream>
-#include <string.h>
 
 static void		copy_full_file(std::ifstream &in, std::ofstream &out)
 {
