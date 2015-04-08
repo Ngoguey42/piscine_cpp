@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Fixed.class.cpp                                    :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/08 12:41:12 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/08 12:44:41 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <iostream>
 #include <cmath>
@@ -42,23 +53,35 @@ Fixed			&Fixed::operator=(Fixed const & rhs)
 ** On the other hand there is no getter to retreive rhs's 'number of fractional'.
 ** I could use toInt() function but I will just do a raw comparison of _rawBits.
 */
-bool			Fixed::operator>(Fixed const & rhs) const{return (this->_rawBits > rhs.getRawBits());}
-bool			Fixed::operator<(Fixed const & rhs) const{return (this->_rawBits < rhs.getRawBits());}
-bool			Fixed::operator>=(Fixed const & rhs) const{return (this->_rawBits >= rhs.getRawBits());}
-bool			Fixed::operator<=(Fixed const & rhs) const{return (this->_rawBits <= rhs.getRawBits());}
-bool			Fixed::operator==(Fixed const & rhs) const{return (this->_rawBits == rhs.getRawBits());}
-bool			Fixed::operator!=(Fixed const & rhs) const{return (this->_rawBits != rhs.getRawBits());}
+bool			Fixed::operator>(Fixed const & rhs) const
+{return (this->_rawBits > rhs.getRawBits());}
+bool			Fixed::operator<(Fixed const & rhs) const
+{return (this->_rawBits < rhs.getRawBits());}
+bool			Fixed::operator>=(Fixed const & rhs) const
+{return (this->_rawBits >= rhs.getRawBits());}
+bool			Fixed::operator<=(Fixed const & rhs) const
+{return (this->_rawBits <= rhs.getRawBits());}
+bool			Fixed::operator==(Fixed const & rhs) const
+{return (this->_rawBits == rhs.getRawBits());}
+bool			Fixed::operator!=(Fixed const & rhs) const
+{return (this->_rawBits != rhs.getRawBits());}
+
 Fixed const		&Fixed::max(Fixed const &f1, Fixed const &f2)
 {return (f1.getRawBits() > f2.getRawBits() ? f1 : f2);}
 Fixed const		&Fixed::min(Fixed const &f1, Fixed const &f2)
 {return (f1.getRawBits() < f2.getRawBits() ? f1 : f2);}
 
-Fixed			Fixed::operator+(Fixed const & rhs) const{return Fixed(this->toFloat() + rhs.toFloat());}
-Fixed			Fixed::operator-(Fixed const & rhs) const{return Fixed(this->toFloat() - rhs.toFloat());}
-Fixed			Fixed::operator*(Fixed const & rhs) const{return Fixed(this->toFloat() * rhs.toFloat());}
-Fixed			Fixed::operator/(Fixed const & rhs) const{return Fixed(this->toFloat() / rhs.toFloat());}
+Fixed			Fixed::operator+(Fixed const & rhs) const
+{return Fixed(this->toFloat() + rhs.toFloat());}
+Fixed			Fixed::operator-(Fixed const & rhs) const
+{return Fixed(this->toFloat() - rhs.toFloat());}
+Fixed			Fixed::operator*(Fixed const & rhs) const
+{return Fixed(this->toFloat() * rhs.toFloat());}
+Fixed			Fixed::operator/(Fixed const & rhs) const
+{return Fixed(this->toFloat() / rhs.toFloat());}
 Fixed			&Fixed::operator++(void){this->_rawBits++; return (*this);}
-Fixed			Fixed::operator++(int){Fixed	cpy(*this); this->_rawBits++; return (cpy);}
+Fixed			Fixed::operator++(int)
+{Fixed	cpy(*this); this->_rawBits++; return (cpy);}
 
 int				Fixed::getRawBits(void) const
 {

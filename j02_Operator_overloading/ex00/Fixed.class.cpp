@@ -11,6 +11,7 @@ Fixed::Fixed() : _rawBits(0), _fb(8)
 Fixed::Fixed(Fixed const & src) : _rawBits(0), _fb(8)
 {
 	std::cout << "Copy constructor called" << std::endl;
+	(void)this->_fb;
 	this->_rawBits = src.getRawBits();
 	return ;
 }
