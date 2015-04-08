@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/07 13:45:45 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/07 13:46:25 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/08 08:52:02 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -27,7 +27,7 @@ ZombieHorde::~ZombieHorde(void)
 	return ;
 }
 
-void		ZombieHorde::announce(void)
+void		ZombieHorde::announce(void) const
 {
 	for (int i = 0; i < this->_len; i++)
 		this->_zombies[i].announce();

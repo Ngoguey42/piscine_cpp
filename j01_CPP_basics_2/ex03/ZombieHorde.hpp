@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/07 13:45:37 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/07 13:45:39 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/08 08:51:50 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -21,7 +21,7 @@ class ZombieHorde
 public:
 	ZombieHorde(int len);
 	~ZombieHorde(void);
-	void					announce(void);
+	void					announce(void) const;
 private:
 	Zombie					*_zombies;
 	int						_len;

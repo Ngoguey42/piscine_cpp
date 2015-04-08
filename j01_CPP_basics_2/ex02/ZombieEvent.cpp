@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/07 12:54:39 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/07 13:32:53 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/08 08:48:12 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -29,7 +29,7 @@ void		ZombieEvent::setZombieType(std::string const &type)
 	return ;
 }
 
-Zombie		*ZombieEvent::newZombie(std::string const &name)
+Zombie		*ZombieEvent::newZombie(std::string const &name) const
 {
 	for (size_t i = 0; i < sizeof(Zombie::types) /
 			 sizeof(*Zombie::types); i++)
