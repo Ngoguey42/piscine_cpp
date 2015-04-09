@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/09 08:57:17 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/09 12:46:36 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/09 16:19:07 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -41,15 +41,17 @@ FragTrap::FragTrap(std::string const &name) :
 		std::endl;
 	return ;
 }
-
 FragTrap::FragTrap(FragTrap const & src) :
-	_name(src._name), _hp(100), _hpMax(100), _mana(100), _manaMax(100), _level(1),
-	_meleeDamage(30), _rangedDamage(20), _armorReduction(5)
+	_name(src._name), _hp(src._hp), _hpMax(src._hpMax),
+	_mana(src._mana), _manaMax(src._manaMax), _level(src._level),
+	_meleeDamage(src._meleeDamage), _rangedDamage(src._rangedDamage),
+	_armorReduction(src._armorReduction)
 {
 	std::cout << "Constructor(copy) called, Check out my package!" <<
 		std::endl;
 	return ;
 }
+
 // ************************************************************* DESTRUCTORS //
 FragTrap::~FragTrap()
 {
@@ -70,6 +72,7 @@ FragTrap			&FragTrap::operator=(FragTrap const &rhs)
 	this->_armorReduction = rhs.getArmorReduction();
 	return (*this);
 }
+
 // ***************************************************************** GETTERS //
 std::string const	&FragTrap::getName(void) const
 {return (this->_name);}
@@ -89,6 +92,7 @@ unsigned int		FragTrap::getRangedDamage(void) const
 {return (this->_rangedDamage);}
 unsigned int		FragTrap::getArmorReduction(void) const
 {return (this->_armorReduction);}
+
 // ***************************************************************** SETTERS //
 void				FragTrap::rangedAttack(std::string const &target) const
 {
