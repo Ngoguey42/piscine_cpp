@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   NinjaTrap.hpp                                      :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/09 13:28:31 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/09 13:34:54 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #ifndef NINJA_TRAP_HPP
 # define NINJA_TRAP_HPP
@@ -13,8 +24,8 @@ public:
 	NinjaTrap();
 	NinjaTrap(NinjaTrap const &src);
 	NinjaTrap(std::string const name);
-	~NinjaTrap();
-	ClapTrap				&operator=(ClapTrap const &rhs);
+	virtual ~NinjaTrap();
+	NinjaTrap				&operator=(NinjaTrap const &rhs);
 
 	void					ninjaShoebox(FragTrap &target);
 	void					ninjaShoebox(ScavTrap &target);
