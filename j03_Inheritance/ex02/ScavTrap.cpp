@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/09 11:27:34 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/09 12:37:30 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/09 16:26:20 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -46,6 +46,7 @@ ScavTrap::ScavTrap(ScavTrap const & src) :
 {
 	std::cout << "Constructor(copy) called, Scav ready to guard!" <<
 		std::endl;
+	this->_class = "SC4V";
 	return ;
 }
 // ************************************************************* DESTRUCTORS //

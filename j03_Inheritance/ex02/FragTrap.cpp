@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/09 08:57:17 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/09 12:37:59 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/09 16:25:53 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -47,6 +47,7 @@ FragTrap::FragTrap(FragTrap const &src) :
 {
 	std::cout << "Constructor(copy) called, Check out my package!" <<
 		std::endl;
+	this->_class = "FR4G";
 	return ;
 }
 // ************************************************************* DESTRUCTORS //
