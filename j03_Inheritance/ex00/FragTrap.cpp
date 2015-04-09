@@ -1,10 +1,18 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   FragTrap.cpp                                       :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/09 08:57:17 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/09 10:08:31 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <iostream>
 #include <cstdlib>
 #include "FragTrap.hpp"
-
-// ************************************************************************* //
-// ************************************************************ CONSTRUCTORS //
 
 static void			fill_func_tab(vh_attack attacks[5])
 {
@@ -16,6 +24,7 @@ static void			fill_func_tab(vh_attack attacks[5])
 	return ;
 }
 
+// ************************************************************ CONSTRUCTORS //
 FragTrap::FragTrap() :
 name("Unknown"), _hp(100), _hpMax(100), _mana(100), _manaMax(100), _level(1),
 _meleeDamage(30), _rangedDamage(20), _armorReduction(5)
@@ -45,16 +54,12 @@ _meleeDamage(30), _rangedDamage(20), _armorReduction(5)
 	fill_func_tab(this->vaulthunter_attacks);
 	return ;
 }
-// CONSTRUCTORS ************************************************************ //
-// ************************************************************************* //
 // ************************************************************* DESTRUCTORS //
 FragTrap::~FragTrap()
 {
 	std::cout << "Destructor called, That looks like it hurt!" << std::endl;
 	return ;
 }
-// DESTRUCTORS ************************************************************* //
-// ************************************************************************* //
 // *************************************************************** OPERATORS //
 FragTrap			&FragTrap::operator=(FragTrap const &rhs)
 {
@@ -69,8 +74,6 @@ FragTrap			&FragTrap::operator=(FragTrap const &rhs)
 	this->_armorReduction = rhs.getArmorReduction();
 	return (*this);
 }
-// OPERATORS *************************************************************** //
-// ************************************************************************* //
 // ***************************************************************** GETTERS //
 std::string			FragTrap::getName(void) const
 {return (this->name);}
@@ -90,19 +93,15 @@ unsigned int		FragTrap::getRangedDamage(void) const
 {return (this->_rangedDamage);}
 unsigned int		FragTrap::getArmorReduction(void) const
 {return (this->_armorReduction);}
-// GETTERS ***************************************************************** //
-// ************************************************************************* //
 // ***************************************************************** SETTERS //
-// SETTERS ***************************************************************** //
-// ************************************************************************* //
-void				FragTrap::rangedAttack(std::string const &target)
+void				FragTrap::rangedAttack(std::string const &target) const
 {
 	std::cout << "<FR4G-TP>"<< this->name << " ranged attacks " <<
 		target << ", for " << this->_rangedDamage << " damages!" <<
 		std::endl;
 	return ;
 }
-void				FragTrap::meleeAttack(std::string const &target)
+void				FragTrap::meleeAttack(std::string const &target) const
 {
 	std::cout << "<FR4G-TP>"<< this->name << " melee attacks " <<
 		target << ", for " << this->_meleeDamage << " damages!" <<
@@ -149,35 +148,35 @@ void				FragTrap::vaulthunter_dot_exe(std::string const &target)
 	(this->*vaulthunter_attacks[rand() % 5])(target);
 	return ;
 }
-void				FragTrap::vh_funzerker(std::string const &target)
+void				FragTrap::vh_funzerker(std::string const &target) const
 {
 	std::cout << "<FR4G-TP>"<< this->name << " uses Funzerker on " <<
 		target << ", for " << this->_meleeDamage << " damages!" <<
 		std::endl;
 	return ;
 }
-void				FragTrap::vh_laserInferno(std::string const &target)
+void				FragTrap::vh_laserInferno(std::string const &target) const
 {
 	std::cout << "<FR4G-TP>"<< this->name << " uses Laser Inferno on " <<
 		target << ", for " << this->_rangedDamage << " damages!" <<
 		std::endl;
 	return ;
 }
-void				FragTrap::vh_miniontrap(std::string const &target)
+void				FragTrap::vh_miniontrap(std::string const &target) const
 {
 	std::cout << "<FR4G-TP>"<< this->name << " uses Miniontrap on " <<
 		target << ", for " << this->_meleeDamage << " damages!" <<
 		std::endl;
 	return ;
 }
-void				FragTrap::vh_oneShotWonder(std::string const &target)
+void				FragTrap::vh_oneShotWonder(std::string const &target) const
 {
 	std::cout << "<FR4G-TP>"<< this->name << " uses One Shot Wonder on " <<
 		target << ", for " << this->_rangedDamage << " damages!" <<
 		std::endl;
 	return ;
 }
-void				FragTrap::vh_torgueFiesta(std::string const &target)
+void				FragTrap::vh_torgueFiesta(std::string const &target) const
 {
 	std::cout << "<FR4G-TP>"<< this->name << " uses Torgue Fiesta on " <<
 		target << ", for " << this->_rangedDamage << " damages!" <<
