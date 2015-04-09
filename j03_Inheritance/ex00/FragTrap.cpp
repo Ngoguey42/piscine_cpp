@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/09 08:57:17 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/09 11:24:16 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/09 11:25:42 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -142,7 +142,6 @@ void				FragTrap::vaulthunter_dot_exe(std::string const &target)
 	}
 	this->_mana -= 25;
 	(this->*FragTrap::vh_tab[rand() % 5])(target);
-	(void)target;
 	return ;
 }
 void				FragTrap::vh_funzerker(std::string const &target) const

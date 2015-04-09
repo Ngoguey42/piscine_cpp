@@ -1,47 +1,54 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   ScavTrap.cpp                                       :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/09 11:27:34 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/09 11:36:32 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <iostream>
 #include <cstdlib>
 #include "ScavTrap.hpp"
 
+ScavTrap::clg		ScavTrap::clg_tab[4] =
+{
+	&ScavTrap::clg_comeback,
+	&ScavTrap::clg_chicken,
+	&ScavTrap::clg_pansy,
+	&ScavTrap::clg_com
+};
+
 // ************************************************************************* //
 // ************************************************************ CONSTRUCTORS //
 
-static void			fill_func_tab(clg_attack attacks[4])
-{
-	attacks[0] = &ScavTrap::clg_comeback; 
-	attacks[1] = &ScavTrap::clg_chicken; 
-	attacks[2] = &ScavTrap::clg_pansy; 
-	attacks[3] = &ScavTrap::clg_com; 
-	return ;
-}
-
 ScavTrap::ScavTrap() :
-name("Unknown"), _hp(100), _hpMax(100), _mana(50), _manaMax(50), _level(1),
+_name("Unknown"), _hp(100), _hpMax(100), _mana(50), _manaMax(50), _level(1),
 _meleeDamage(20), _rangedDamage(15), _armorReduction(3)
 {
 	std::cout << "Constructor called, Scav operational." <<
 		std::endl;
-	fill_func_tab(this->challenges);
 	return ;
 }
 
 ScavTrap::ScavTrap(std::string const name) :
-name(name), _hp(100), _hpMax(100), _mana(50), _manaMax(50), _level(1),
+_name(name), _hp(100), _hpMax(100), _mana(50), _manaMax(50), _level(1),
 _meleeDamage(20), _rangedDamage(15), _armorReduction(3)
 {
 	std::cout << "Constructor(name) called, Scav ready to fight!" <<
 		std::endl;
-	fill_func_tab(this->challenges);
 	return ;
 }
 
 ScavTrap::ScavTrap(ScavTrap const & src) :
-name(src.name), _hp(100), _hpMax(100), _mana(50), _manaMax(50), _level(1),
+_name(src._name), _hp(100), _hpMax(100), _mana(50), _manaMax(50), _level(1),
 _meleeDamage(20), _rangedDamage(15), _armorReduction(3)
 {
 	std::cout << "Constructor(copy) called, Scav ready to guard!" <<
 		std::endl;
-	fill_func_tab(this->challenges);
 	return ;
 }
 // CONSTRUCTORS ************************************************************ //
@@ -71,8 +78,8 @@ ScavTrap			&ScavTrap::operator=(ScavTrap const &rhs)
 // OPERATORS *************************************************************** //
 // ************************************************************************* //
 // ***************************************************************** GETTERS //
-std::string			ScavTrap::getName(void) const
-{return (this->name);}
+std::string const	&ScavTrap::getName(void) const
+{return (this->_name);}
 unsigned int		ScavTrap::getHpMax(void) const
 {return (this->_hpMax);}
 unsigned int		ScavTrap::getHp(void) const
@@ -94,23 +101,23 @@ unsigned int		ScavTrap::getArmorReduction(void) const
 // ***************************************************************** SETTERS //
 // SETTERS ***************************************************************** //
 // ************************************************************************* //
-void				ScavTrap::rangedAttack(std::string const &target)
+void				ScavTrap::rangedAttack(std::string const &target) const
 {
-	std::cout << "<SC4V-TP>"<< this->name << " ranged attacks " <<
+	std::cout << "<SC4V-TP>"<< this->_name << " ranged attacks " <<
 		target << ", for " << this->_rangedDamage << " damages!" <<
 		std::endl;
 	return ;
 }
-void				ScavTrap::meleeAttack(std::string const &target)
+void				ScavTrap::meleeAttack(std::string const &target) const
 {
-	std::cout << "<SC4V-TP>"<< this->name << " melee attacks " <<
+	std::cout << "<SC4V-TP>"<< this->_name << " melee attacks " <<
 		target << ", for " << this->_meleeDamage << " damages!" <<
 		std::endl;
 	return ;
 }
 void				ScavTrap::takeDamage(unsigned int amount)
 {
-	std::cout << "<SC4V-TP>"<< this->name;
+	std::cout << "<SC4V-TP>"<< this->_name;
 	if (amount <= this->_armorReduction)
 		std::cout << " resists ";
 	else
@@ -130,7 +137,7 @@ void				ScavTrap::beRepaired(unsigned int amount)
 	this->_hp += amount;
 	if (this->_hp > this->_hpMax)
 		this->_hp = this->_hpMax;
-	std::cout << "<SC4V-TP>"<< this->name << " gains " << amount <<
+	std::cout << "<SC4V-TP>"<< this->_name << " gains " << amount <<
 		" health points!" << "(" << this->_hp << "/" << this->_hpMax <<
 		")" << std::endl;
 	return ;
@@ -138,30 +145,30 @@ void				ScavTrap::beRepaired(unsigned int amount)
 
 void				ScavTrap::challengeNewcomer(std::string const &target)
 {
-	(this->*challenges[rand() % 4])(target);
+	(this->*ScavTrap::clg_tab[rand() % 4])(target);
 	return ;
 }
-void				ScavTrap::clg_com(std::string const &target)
+void				ScavTrap::clg_com(std::string const &target) const
 {
-	std::cout << "<SC4V-TP>"<< this->name << ": Come 'ere " << target <<
+	std::cout << "<SC4V-TP>"<< this->_name << ": Come 'ere " << target <<
 		"!" << std::endl;
 	return ;
 }
-void				ScavTrap::clg_pansy(std::string const &target)
+void				ScavTrap::clg_pansy(std::string const &target) const
 {
-	std::cout << "<SC4V-TP>"<< this->name << ": Come on " << target <<
+	std::cout << "<SC4V-TP>"<< this->_name << ": Come on " << target <<
 		" you pansy!" << std::endl;
 	return ;
 }
-void				ScavTrap::clg_chicken(std::string const &target)
+void				ScavTrap::clg_chicken(std::string const &target) const
 {
-	std::cout << "<SC4V-TP>"<< this->name << ": Chicken! " << target <<
+	std::cout << "<SC4V-TP>"<< this->_name << ": Chicken! " << target <<
 	" Chicken!" << std::endl;
 	return ;
 }
-void				ScavTrap::clg_comeback(std::string const &target)
+void				ScavTrap::clg_comeback(std::string const &target) const
 {
-	std::cout << "<SC4V-TP>"<< this->name << ": Come back here " << target <<
+	std::cout << "<SC4V-TP>"<< this->_name << ": Come back here " << target <<
 		" and take what's coming to you." << std::endl;
 	return ;
 }

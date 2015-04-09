@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   FragTrap.hpp                                       :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/09 08:57:11 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/09 11:24:47 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #ifndef FRAG_TRAP_HPP
 # define FRAG_TRAP_HPP
@@ -7,38 +18,49 @@
 class FragTrap
 {
 public:
+	// * NESTED OBJECTS ************* //
+	typedef void			(FragTrap::*vh)(std::string const &target) const;
+
+	// * STATICS ******************** //
+	static FragTrap::vh		vh_tab[5];
+
+	// * CTORS / DTORS ************** //
 	FragTrap();
 	FragTrap(FragTrap const &src);
 	FragTrap(std::string const name);
 	~FragTrap();
 	FragTrap				&operator=(FragTrap const &rhs);
 	
-	void					rangedAttack(std::string const &target);
-	void					meleeAttack(std::string const &target);
+	// * ATTRIBUTES ***************** //
+
+	// * GETTERS / SETTERS ********** //
+	std::string const		&getName(void) const;
+	unsigned int			getHp(void) const;
+	unsigned int			getHpMax(void) const;
+	unsigned int			getMana(void) const;
+	unsigned int			getManaMax(void) const;
+	unsigned int			getLevel(void) const;
+	unsigned int			getMeleeDamage(void) const;
+	unsigned int			getRangedDamage(void) const;
+	unsigned int			getArmorReduction(void) const;
+
+	// * MEMBER FUNCTIONS / METHODS * //
+	void					rangedAttack(std::string const &target) const;
+	void					meleeAttack(std::string const &target) const;
 	void					takeDamage(unsigned int amount);
 	void					beRepaired(unsigned int amount);
-	
-	std::string const		name;
-	std::string				getName(void)  const;
-	unsigned int			getHp(void)  const;
-	unsigned int			getHpMax(void)  const;
-	unsigned int			getMana(void)  const;
-	unsigned int			getManaMax(void)  const;
-	unsigned int			getLevel(void)  const;
-	unsigned int			getMeleeDamage(void)  const;
-	unsigned int			getRangedDamage(void)  const;
-	unsigned int			getArmorReduction(void)  const;
-	
-	void					(FragTrap::*vaulthunter_attacks[5])
-								(std::string const &target);
-	void					vh_funzerker(std::string const &target);
-	void					vh_laserInferno(std::string const &target);
-	void					vh_miniontrap(std::string const &target);
-	void					vh_oneShotWonder(std::string const &target);
-	void					vh_torgueFiesta(std::string const &target);
+
 	void					vaulthunter_dot_exe(std::string const &target);
+	void					vh_funzerker(std::string const &target) const;
+	void					vh_laserInferno(std::string const &target) const;
+	void					vh_miniontrap(std::string const &target) const;
+	void					vh_oneShotWonder(std::string const &target) const;
+	void					vh_torgueFiesta(std::string const &target) const;
+
 	
 private:
+	// * ATTRIBUTES ***************** //
+	std::string const		_name;
 	unsigned int			_hp;
 	unsigned int			_hpMax;
 	unsigned int			_mana;
@@ -49,6 +71,7 @@ private:
 	unsigned int			_armorReduction;
 };
 
-typedef void				(FragTrap::*vh_attack)(std::string const &target);
+typedef void				(FragTrap::*vh_attack)(std::string const &target)
+	const;
 
 #endif // **************************************************** FRAG_TRAP_HPP //
