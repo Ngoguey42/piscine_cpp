@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/08 12:41:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/08 12:41:22 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/09 06:58:38 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -43,10 +43,14 @@ public:
 	int					toInt(void) const;
 	
 	static Fixed const	&max(Fixed const &f1, Fixed const &f2);
+	static Fixed		&max(Fixed &f1, Fixed &f2);
 	static Fixed const	&min(Fixed const &f1, Fixed const &f2);
+	static Fixed		&min(Fixed &f1, Fixed &f2);
+	
 private:
 	int					_rawBits;
-	int const			_fb;
+	static int const	_fb;
+	
 };
 
 std::ostream			&operator<<(std::ostream & o, Fixed const & rhs);
