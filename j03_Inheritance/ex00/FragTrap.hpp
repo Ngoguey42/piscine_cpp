@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/09 08:57:11 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/09 10:08:43 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/09 11:24:47 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -18,6 +18,12 @@
 class FragTrap
 {
 public:
+	// * NESTED OBJECTS ************* //
+	typedef void			(FragTrap::*vh)(std::string const &target) const;
+
+	// * STATICS ******************** //
+	static FragTrap::vh		vh_tab[5];
+
 	// * CTORS / DTORS ************** //
 	FragTrap();
 	FragTrap(FragTrap const &src);
@@ -26,20 +32,17 @@ public:
 	FragTrap				&operator=(FragTrap const &rhs);
 	
 	// * ATTRIBUTES ***************** //
-	std::string const		name;
-	void					(FragTrap::*vaulthunter_attacks[5])
-								(std::string const &target) const;
 
 	// * GETTERS / SETTERS ********** //
-	std::string				getName(void)  const;
-	unsigned int			getHp(void)  const;
-	unsigned int			getHpMax(void)  const;
-	unsigned int			getMana(void)  const;
-	unsigned int			getManaMax(void)  const;
-	unsigned int			getLevel(void)  const;
-	unsigned int			getMeleeDamage(void)  const;
-	unsigned int			getRangedDamage(void)  const;
-	unsigned int			getArmorReduction(void)  const;
+	std::string const		&getName(void) const;
+	unsigned int			getHp(void) const;
+	unsigned int			getHpMax(void) const;
+	unsigned int			getMana(void) const;
+	unsigned int			getManaMax(void) const;
+	unsigned int			getLevel(void) const;
+	unsigned int			getMeleeDamage(void) const;
+	unsigned int			getRangedDamage(void) const;
+	unsigned int			getArmorReduction(void) const;
 
 	// * MEMBER FUNCTIONS / METHODS * //
 	void					rangedAttack(std::string const &target) const;
@@ -53,9 +56,11 @@ public:
 	void					vh_miniontrap(std::string const &target) const;
 	void					vh_oneShotWonder(std::string const &target) const;
 	void					vh_torgueFiesta(std::string const &target) const;
+
 	
 private:
 	// * ATTRIBUTES ***************** //
+	std::string const		_name;
 	unsigned int			_hp;
 	unsigned int			_hpMax;
 	unsigned int			_mana;
