@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/08 12:35:08 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/08 12:35:08 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/09 06:37:30 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -14,30 +14,32 @@
 #include <cmath>
 #include "Fixed.class.hpp"
 
-Fixed::Fixed() : _rawBits(0), _fb(8)
+int const					Fixed::_fb = 8;
+
+Fixed::Fixed() : _rawBits(0)
 {
 	std::cout << "Default constructor called" << std::endl;
 	return ;
 }
 
-Fixed::Fixed(Fixed const & src) : _rawBits(0), _fb(8)
+Fixed::Fixed(Fixed const & src) : _rawBits(0)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	this->_rawBits = src.getRawBits();
 	return ;
 }
 
-Fixed::Fixed(int const raw) : _rawBits(0), _fb(8)
+Fixed::Fixed(int const raw) : _rawBits(0)
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->_rawBits = raw << this->_fb;
+	this->_rawBits = raw << Fixed::_fb;
 	return ;
 }
 
-Fixed::Fixed(float const floating_point) : _rawBits(0), _fb(8)
+Fixed::Fixed(float const floating_point) : _rawBits(0)
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->_rawBits = (int)roundf(floating_point * (float)(1 << this->_fb));
+	this->_rawBits = (int)roundf(floating_point * (float)(1 << Fixed::_fb));
 	return ;
 }
 
@@ -69,11 +71,11 @@ void			Fixed::setRawBits(int const raw)
 
 int				Fixed::toInt(void) const
 {
-	return (this->_rawBits >> this->_fb);
+	return (this->_rawBits >> Fixed::_fb);
 }
 float			Fixed::toFloat(void) const
 {
-	return ((float)this->_rawBits / (float)(1 << this->_fb));
+	return ((float)this->_rawBits / (float)(1 << Fixed::_fb));
 }
 
 std::ostream	&operator<<(std::ostream & o, Fixed const & rhs)
