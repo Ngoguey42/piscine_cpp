@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/09 13:28:35 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/09 13:34:31 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/09 13:37:02 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -23,7 +23,7 @@ NinjaTrap::NinjaTrap() :
 	this->loadDefaultStats();
 	return ;
 }
-NinjaTrap::NinjaTrap(std::string const name) :
+NinjaTrap::NinjaTrap(std::string const &name) :
 	ClapTrap(name)
 {
 	std::cout << "Ninja Constructor(name) called, What do you need?" <<

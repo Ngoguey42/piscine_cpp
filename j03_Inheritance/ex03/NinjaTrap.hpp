@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/09 13:28:31 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/09 13:34:54 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/09 13:36:44 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -23,7 +23,7 @@ class NinjaTrap : public ClapTrap
 public:
 	NinjaTrap();
 	NinjaTrap(NinjaTrap const &src);
-	NinjaTrap(std::string const name);
+	NinjaTrap(std::string const &name);
 	virtual ~NinjaTrap();
 	NinjaTrap				&operator=(NinjaTrap const &rhs);
 
