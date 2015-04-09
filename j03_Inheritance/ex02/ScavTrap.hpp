@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   ScavTrap.hpp                                       :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/09 11:27:12 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/09 12:36:49 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #ifndef SCAV_TRAP_HPP
 # define SCAV_TRAP_HPP
@@ -8,24 +19,29 @@
 class ScavTrap : public ClapTrap
 {
 public:
+	// * NESTED OBJECTS ************* //
+	typedef void(ScavTrap::*clg)(std::string const &target) const;
+
+	// * STATICS ******************** //
+	static ScavTrap::clg	clg_tab[4];
+	
+	// * CTORS / DTORS ************** //
 	ScavTrap();
 	ScavTrap(ScavTrap const &src);
-	ScavTrap(std::string const name);
-	~ScavTrap();
-	ClapTrap				&operator=(ClapTrap const &rhs);
+	ScavTrap(std::string const &name);
+	virtual ~ScavTrap();
+	ScavTrap				&operator=(ScavTrap const &rhs);
 
-	void					(ScavTrap::*challenges[4])
-								(std::string const &target);
-	void					clg_comeback(std::string const &target);
-	void					clg_chicken(std::string const &target);
-	void					clg_pansy(std::string const &target);
-	void					clg_com(std::string const &target);
+	// * MEMBER FUNCTIONS / METHODS * //
+
+	void					clg_comeback(std::string const &target) const;
+	void					clg_chicken(std::string const &target) const;
+	void					clg_pansy(std::string const &target) const;
+	void					clg_com(std::string const &target) const;
 	void					challengeNewcomer(std::string const &target);
 	
 private:
-	void					loadDefaultStats(void);
+	void                    loadDefaultStats(void);
 };
-
-typedef void				(ScavTrap::*clg_attack)(std::string const &target);
 
 #endif // **************************************************** SCAV_TRAP_HPP //

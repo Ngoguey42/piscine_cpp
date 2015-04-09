@@ -1,12 +1,125 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   FragTrap.cpp                                       :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/09 08:57:17 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/09 12:37:59 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <iostream>
 #include <cstdlib>
 #include "FragTrap.hpp"
 
-// ************************************************************************* //
-// ************************************************************ CONSTRUCTORS //
+FragTrap::vh			FragTrap::vh_tab[5] =
+{
+	&FragTrap::vh_funzerker,
+	&FragTrap::vh_laserInferno,
+	&FragTrap::vh_miniontrap,
+	&FragTrap::vh_oneShotWonder,
+	&FragTrap::vh_torgueFiesta
+};
 
-void				FragTrap::loadDefaultStats(void)
+// ************************************************************ CONSTRUCTORS //
+FragTrap::FragTrap() :
+	ClapTrap()
+{
+	std::cout << "Constructor called, Let's get this party started!" <<
+		std::endl;
+	this->loadDefaultStats();
+	return ;
+}
+
+FragTrap::FragTrap(std::string const &name) :
+	ClapTrap(name)
+{
+	std::cout << "Constructor(name) called, Recompiling my combat code!" <<
+		std::endl;
+	this->loadDefaultStats();
+	return ;
+}
+
+FragTrap::FragTrap(FragTrap const &src) :
+	ClapTrap(src)
+{
+	std::cout << "Constructor(copy) called, Check out my package!" <<
+		std::endl;
+	return ;
+}
+// ************************************************************* DESTRUCTORS //
+FragTrap::~FragTrap()
+{
+	std::cout << "Destructor called, That looks like it hurt!" << std::endl;
+	return ;
+}
+// *************************************************************** OPERATORS //
+FragTrap			&FragTrap::operator=(FragTrap const &rhs)
+{
+	std::cout << "= overload called" << std::endl;
+	ClapTrap::operator = (rhs);
+	// this->_hp = rhs.getHp();
+	// this->_hpMax = rhs.getHpMax();
+	// this->_mana = rhs.getMana();
+	// this->_manaMax = rhs.getManaMax();
+	// this->_level = rhs.getLevel();
+	// this->_meleeDamage = rhs.getMeleeDamage();
+	// this->_rangedDamage = rhs.getRangedDamage();
+	// this->_armorReduction = rhs.getArmorReduction();
+	return (*this);
+}
+// ***************************************************************** SETTERS //
+void				FragTrap::vaulthunter_dot_exe(std::string const &target)
+{
+	if (this->_mana < 25)
+	{
+		std::cout << "<FR4G-TP>"<< this->_name << " doesn't have enough energy!"
+				  << std::endl;
+		return ;
+	}
+	this->_mana -= 25;
+	(this->*FragTrap::vh_tab[rand() % 5])(target);
+	return ;
+}
+void				FragTrap::vh_funzerker(std::string const &target) const
+{
+	std::cout << "<FR4G-TP>"<< this->_name << " uses Funzerker on " <<
+		target << ", for " << this->_meleeDamage << " damages!" <<
+		std::endl;
+	return ;
+}
+void				FragTrap::vh_laserInferno(std::string const &target) const
+{
+	std::cout << "<FR4G-TP>"<< this->_name << " uses Laser Inferno on " <<
+		target << ", for " << this->_rangedDamage << " damages!" <<
+		std::endl;
+	return ;
+}
+void				FragTrap::vh_miniontrap(std::string const &target) const
+{
+	std::cout << "<FR4G-TP>"<< this->_name << " uses Miniontrap on " <<
+		target << ", for " << this->_meleeDamage << " damages!" <<
+		std::endl;
+	return ;
+}
+void				FragTrap::vh_oneShotWonder(std::string const &target) const
+{
+	std::cout << "<FR4G-TP>"<< this->_name << " uses One Shot Wonder on " <<
+		target << ", for " << this->_rangedDamage << " damages!" <<
+		std::endl;
+	return ;
+}
+void				FragTrap::vh_torgueFiesta(std::string const &target) const
+{
+	std::cout << "<FR4G-TP>"<< this->_name << " uses Torgue Fiesta on " <<
+		target << ", for " << this->_rangedDamage << " damages!" <<
+		std::endl;
+	return ;
+}
+
+void                FragTrap::loadDefaultStats(void)
 {
 	this->_hp = 100;
 	this->_hpMax = 100;
@@ -17,106 +130,5 @@ void				FragTrap::loadDefaultStats(void)
 	this->_rangedDamage = 20;
 	this->_armorReduction = 5;
 	this->_class = "FR4G";
-	return ;
-}
-
-static void			fill_func_tab(vh_attack attacks[5])
-{
-	attacks[0] = &FragTrap::vh_funzerker; 
-	attacks[1] = &FragTrap::vh_laserInferno; 
-	attacks[2] = &FragTrap::vh_miniontrap; 
-	attacks[3] = &FragTrap::vh_oneShotWonder; 
-	attacks[4] = &FragTrap::vh_torgueFiesta; 
-	return ;
-}
-
-FragTrap::FragTrap() :
-	ClapTrap("Unknown_fragTrap")
-{
-	std::cout << "Constructor called, Let's get this party started!" <<
-		std::endl;
-	fill_func_tab(this->vaulthunter_attacks);
-	this->loadDefaultStats();
-	return ;
-}
-
-FragTrap::FragTrap(std::string const name) :
-	ClapTrap(name)
-{
-	std::cout << "Constructor(name) called, Recompiling my combat code!" <<
-		std::endl;
-	fill_func_tab(this->vaulthunter_attacks);
-	this->loadDefaultStats();
-	return ;
-}
-
-FragTrap::FragTrap(FragTrap const & src) :
-	ClapTrap(src)
-{
-	std::cout << "Constructor(copy) called, Check out my package!" <<
-		std::endl;
-	fill_func_tab(this->vaulthunter_attacks);
-	this->loadDefaultStats();
-	return ;
-}
-// CONSTRUCTORS ************************************************************ //
-// ************************************************************************* //
-// ************************************************************* DESTRUCTORS //
-FragTrap::~FragTrap()
-{
-	std::cout << "Destructor called, That looks like it hurt!" << std::endl;
-	return ;
-}
-// DESTRUCTORS ************************************************************* //
-// ************************************************************************* //
-// *************************************************************** OPERATORS //
-// OPERATORS *************************************************************** //
-// ************************************************************************* //
-// ***************************************************************** GETTERS //
-// GETTERS ***************************************************************** //
-// ************************************************************************* //
-// ***************************************************************** SETTERS //
-// SETTERS ***************************************************************** //
-// ************************************************************************* //
-void				FragTrap::vaulthunter_dot_exe(std::string const &target)
-{
-	if (this->_mana < 25)
-	{
-		std::cout << "<FR4G-TP>"<< this->name << " doesn't have enough energy!"
-			<< std::endl;
-		return ;
-	}
-	this->_mana -= 25;
-	(this->*vaulthunter_attacks[rand() % 5])(target);
-	return ;
-}
-void				FragTrap::vh_funzerker(std::string const &target)
-{
-	std::cout << "<FR4G-TP>"<< this->name << " uses Funzerker on " <<
-		target << ", for " << this->_meleeDamage << " damages!" << std::endl;
-	return ;
-}
-void				FragTrap::vh_laserInferno(std::string const &target)
-{
-	std::cout << "<FR4G-TP>"<< this->name << " uses Laser Inferno on " <<
-		target << ", for " << this->_rangedDamage << " damages!" << std::endl;
-	return ;
-}
-void				FragTrap::vh_miniontrap(std::string const &target)
-{
-	std::cout << "<FR4G-TP>"<< this->name << " uses Miniontrap on " <<
-		target << ", for " << this->_meleeDamage << " damages!" << std::endl;
-	return ;
-}
-void				FragTrap::vh_oneShotWonder(std::string const &target)
-{
-	std::cout << "<FR4G-TP>"<< this->name << " uses One Shot Wonder on " <<
-		target << ", for " << this->_rangedDamage << " damages!" << std::endl;
-	return ;
-}
-void				FragTrap::vh_torgueFiesta(std::string const &target)
-{
-	std::cout << "<FR4G-TP>"<< this->name << " uses Torgue Fiesta on " <<
-		target << ", for " << this->_rangedDamage << " damages!" << std::endl;
 	return ;
 }
