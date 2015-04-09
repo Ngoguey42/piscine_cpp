@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/08 12:28:48 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/08 12:28:49 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/09 06:33:41 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -23,8 +23,8 @@ public:
 	int					getRawBits(void) const;
 	void				setRawBits(int const raw);
 private:
+	static int const	_fb;
 	int					_rawBits;
-	int const			_fb;
 };
 
 #endif

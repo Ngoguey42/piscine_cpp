@@ -1,17 +1,29 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Fixed.class.cpp                                    :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/09 06:33:49 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/09 06:35:32 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <iostream>
 #include "Fixed.class.hpp"
 
-Fixed::Fixed() : _rawBits(0), _fb(8)
+int const					Fixed::_fb = 8;
+
+Fixed::Fixed() : _rawBits(0)
 {
 	std::cout << "Default constructor called" << std::endl;
 	return ;
 }
 
-Fixed::Fixed(Fixed const & src) : _rawBits(0), _fb(8)
+Fixed::Fixed(Fixed const & src) : _rawBits(0)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	(void)this->_fb;
 	this->_rawBits = src.getRawBits();
 	return ;
 }
