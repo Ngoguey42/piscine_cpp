@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/09 11:27:12 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/09 11:34:52 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/09 12:49:14 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -23,11 +23,11 @@ public:
 
 	// * STATICS ******************** //
 	static ScavTrap::clg	clg_tab[4];
-	
+
 	// * CTORS / DTORS ************** //
 	ScavTrap();
 	ScavTrap(ScavTrap const &src);
-	ScavTrap(std::string const name);
+	ScavTrap(std::string const &name);
 	~ScavTrap();
 	ScavTrap				&operator=(ScavTrap const &rhs);
 
@@ -69,7 +69,5 @@ private:
 	unsigned int			_rangedDamage;
 	unsigned int			_armorReduction;
 };
-
-typedef void				(ScavTrap::*clg_attack)(std::string const &target);
 
 #endif // **************************************************** SCAV_TRAP_HPP //

@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/09 08:57:11 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/09 11:24:47 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/09 12:46:33 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -27,7 +27,7 @@ public:
 	// * CTORS / DTORS ************** //
 	FragTrap();
 	FragTrap(FragTrap const &src);
-	FragTrap(std::string const name);
+	FragTrap(std::string const &name);
 	~FragTrap();
 	FragTrap				&operator=(FragTrap const &rhs);
 	
@@ -70,8 +70,5 @@ private:
 	unsigned int			_rangedDamage;
 	unsigned int			_armorReduction;
 };
-
-typedef void				(FragTrap::*vh_attack)(std::string const &target)
-	const;
 
 #endif // **************************************************** FRAG_TRAP_HPP //

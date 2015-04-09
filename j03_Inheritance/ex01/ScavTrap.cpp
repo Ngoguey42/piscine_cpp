@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/09 11:27:34 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/09 11:36:32 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/09 12:49:11 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -34,7 +34,7 @@ _meleeDamage(20), _rangedDamage(15), _armorReduction(3)
 	return ;
 }
 
-ScavTrap::ScavTrap(std::string const name) :
+ScavTrap::ScavTrap(std::string const &name) :
 _name(name), _hp(100), _hpMax(100), _mana(50), _manaMax(50), _level(1),
 _meleeDamage(20), _rangedDamage(15), _armorReduction(3)
 {
