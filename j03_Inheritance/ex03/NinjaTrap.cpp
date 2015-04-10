@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/09 13:28:35 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/09 13:37:02 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/10 11:29:55 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -49,16 +49,8 @@ NinjaTrap::~NinjaTrap()
 // *************************************************************** OPERATORS //
 NinjaTrap            &NinjaTrap::operator=(NinjaTrap const &rhs)
 {
-	std::cout << "= overload called (scav)" << std::endl;
+	std::cout << "= overload called (ninja)" << std::endl;
 	ClapTrap::operator = (rhs);
-	// this->_hp = rhs.getHp();
-	// this->_hpMax = rhs.getHpMax();
-	// this->_mana = rhs.getMana();
-	// this->_manaMax = rhs.getManaMax();
-	// this->_level = rhs.getLevel();
-	// this->_meleeDamage = rhs.getMeleeDamage();
-	// this->_rangedDamage = rhs.getRangedDamage();
-	// this->_armorReduction = rhs.getArmorReduction();
 	return (*this);
 }
 

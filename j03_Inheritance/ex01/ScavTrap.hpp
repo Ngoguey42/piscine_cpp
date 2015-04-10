@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/09 11:27:12 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/09 12:49:14 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/10 11:24:43 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -19,7 +19,7 @@ class ScavTrap
 {
 public:
 	// * NESTED OBJECTS ************* //
-	typedef void(ScavTrap::*clg)(std::string const &target) const;
+	typedef void			(ScavTrap::*clg)(std::string const &target) const;
 
 	// * STATICS ******************** //
 	static ScavTrap::clg	clg_tab[4];
@@ -42,9 +42,6 @@ public:
 	unsigned int			getRangedDamage(void)  const;
 	unsigned int			getArmorReduction(void)  const;
 	
-	void					(ScavTrap::*challenges[4])
-								(std::string const &target);
-
 	// * MEMBER FUNCTIONS / METHODS * //
 	void					rangedAttack(std::string const &target) const;
 	void					meleeAttack(std::string const &target) const;
