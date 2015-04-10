@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/10 14:56:40 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/10 15:25:19 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/10 15:45:26 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -46,8 +46,7 @@ Squad						&Squad::operator=(Squad const &rhs)
 {
 	std::cout << "[Squad] operator =" << std::endl;
 	this->deleteUnits();
-	this->_count = rhs.getCount();
-	for (int i = 0; i < this->_count; i++)
+	for (int i = 0; i < rhs.getCount(); i++)		
 		this->push(rhs.getUnit(i)->clone());
 	return (*this);
 }
