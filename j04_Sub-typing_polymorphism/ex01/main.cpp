@@ -1,4 +1,14 @@
-
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   main.cpp                                           :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/10 14:23:09 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/10 14:25:15 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include "Enemy.hpp"
 #include "SuperMutant.hpp"
@@ -13,8 +23,8 @@ void 	enemies_tests(void);
 
 int main()
 {
-	// enemies_tests();
-	// return (0);
+	enemies_tests();
+	return (0);
 	
 	Character* zaz = new Character("zaz");
 	

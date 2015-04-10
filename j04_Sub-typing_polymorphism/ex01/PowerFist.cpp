@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   PowerFist.cpp                                      :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/10 14:08:27 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/10 14:12:36 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <iostream>
 #include <cstdlib>
@@ -44,10 +55,7 @@ PowerFist::~PowerFist()
 PowerFist				&PowerFist::operator=(PowerFist const &rhs)
 {
 	std::cout << "[PowerFist]= called!" << std::endl;
-	this->_aPCost = rhs.getAPCost();
-	this->_damage = rhs.getDamage();
-	this->_name = rhs.getName();
-	this->_msg = rhs.getMsg();
+	AWeapon::operator = (rhs);
 	return (*this);
 }
 // std::ostream		&operator<<(std::ostream & o, PowerFist const & rhs)

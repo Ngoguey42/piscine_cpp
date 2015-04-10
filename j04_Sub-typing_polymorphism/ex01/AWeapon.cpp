@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   AWeapon.cpp                                        :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/10 14:06:59 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/10 14:09:21 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <iostream>
 #include <cstdlib>
@@ -5,14 +16,6 @@
 
 // ************************************************************************** //
 // ************************************************************* CONSTRUCTORS //
-
-AWeapon::AWeapon() :
-_name("NoName"), _damage(0), _aPCost(1), _msg("No msg.")
-{
-	std::cout << "[AWeapon]() constructor called!" << std::endl;
-	return ;
-}
-
 AWeapon::AWeapon(AWeapon const & src) :
 _name(src.getName()), _damage(src.getDamage()), _aPCost(src.getAPCost()),
 _msg(src.getMsg())
@@ -47,11 +50,6 @@ AWeapon				&AWeapon::operator=(AWeapon const &rhs)
 	this->_msg = rhs.getMsg();
 	return (*this);
 }
-// std::ostream		&operator<<(std::ostream & o, AWeapon const & rhs)
-// {
-	// o << "" << std::endl;
-	// return (o);
-// }
 // OPERATORS **************************************************************** //
 // ************************************************************************** //
 // ****************************************************************** GETTERS //

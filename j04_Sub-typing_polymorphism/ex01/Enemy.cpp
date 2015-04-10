@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Enemy.cpp                                          :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/10 14:13:32 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/10 14:15:10 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <iostream>
 #include <cstdlib>
@@ -5,14 +16,6 @@
 
 // ************************************************************************** //
 // ************************************************************* CONSTRUCTORS //
-
-Enemy::Enemy() :
-_hp(100), _type("NoType")
-{
-	std::cout << "[Enemy]() constructor called!" << std::endl;
-	return ;
-}
-
 Enemy::Enemy(Enemy const & src) :
 _hp(src.getHp()), _type(src.getType())
 {
@@ -44,18 +47,9 @@ Enemy				&Enemy::operator=(Enemy const &rhs)
 	this->_type = rhs.getType();
 	return (*this);
 }
-// std::ostream		&operator<<(std::ostream & o, Enemy const & rhs)
-// {
-	// o << "" << std::endl;
-	// return (o);
-// }
-// OPERATORS **************************************************************** //
-// ************************************************************************** //
 // ****************************************************************** GETTERS //
-std::string	const	&Enemy::getType(void) const
-{return (this->_type);}
-int					Enemy::getHp(void) const
-{return (this->_hp);}
+std::string	const	&Enemy::getType(void) const{return (this->_type);}
+int					Enemy::getHp(void) const{return (this->_hp);}
 // GETTERS ****************************************************************** //
 // ************************************************************************** //
 // ****************************************************************** SETTERS //
@@ -72,7 +66,7 @@ void				Enemy::takeDamage(int amount)
 			this->_hp = 0;
 	}
 	else
-		std::cout << 0;
+		std::cout << '0';
 	std::cout << "hp. (" << this->_hp << ")" << std::endl;
 	return ;
 }

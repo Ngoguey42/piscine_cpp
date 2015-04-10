@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Character.hpp                                      :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/10 14:20:02 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/10 14:21:09 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #ifndef CHARACTER_HPP
 # define CHARACTER_HPP
@@ -10,9 +21,7 @@ class Character
 {
 public:
 	Character(std::string const &name);
-	Character(Character const &rhs);
 	virtual ~Character();
-	Character						&operator=(Character const &rhs);
 	
 	std::string const			&getName(void) const;
 	int							getAP(void) const;
@@ -26,6 +35,9 @@ public:
 	
 protected:
 	Character();
+	Character						&operator=(Character const &rhs);
+	Character(Character const &rhs);
+	
 	std::string					_name;
 	int							_aP;
 	int							_aPMax;

@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   PlasmaRifle.cpp                                    :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/10 14:11:37 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/10 14:19:21 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <iostream>
 #include <cstdlib>
@@ -44,10 +55,7 @@ PlasmaRifle::~PlasmaRifle()
 PlasmaRifle				&PlasmaRifle::operator=(PlasmaRifle const &rhs)
 {
 	std::cout << "[PlasmaRifle]= called!" << std::endl;
-	this->_aPCost = rhs.getAPCost();
-	this->_damage = rhs.getDamage();
-	this->_name = rhs.getName();
-	this->_msg = rhs.getMsg();
+	AWeapon::operator = (rhs);
 	return (*this);
 }
 // std::ostream		&operator<<(std::ostream & o, PlasmaRifle const & rhs)

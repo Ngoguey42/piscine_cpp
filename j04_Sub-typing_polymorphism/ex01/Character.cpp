@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Character.cpp                                      :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/10 14:20:03 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/10 14:21:21 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <iostream>
 #include <cstdlib>
@@ -10,22 +21,6 @@ int const				Character::_defaultAPRecover = 10;
 // STATICS ****************************************************************** //
 // ************************************************************************** //
 // ************************************************************* CONSTRUCTORS //
-
-Character::Character() :
-_name("NoName"), _aP(Character::_defaultAPMax),
-_aPMax(Character::_defaultAPMax), _weaponPtr(NULL)
-{
-	std::cout << "[Character]() constructor called!" << std::endl;
-	return ;
-}
-
-Character::Character(Character const &src) :
-_name(src.getName()), _aP(src.getAP()), _aPMax(src.getAPMax()), _weaponPtr(NULL)
-{
-	std::cout << "[Character](src) constructor called!" << std::endl;
-	return ;
-}
-
 Character::Character(std::string const &name) :
 _name(name), _aP(Character::_defaultAPMax),
 _aPMax(Character::_defaultAPMax), _weaponPtr(NULL)
@@ -44,14 +39,6 @@ Character::~Character()
 // DESTRUCTORS ************************************************************** //
 // ************************************************************************** //
 // **************************************************************** OPERATORS //
-Character				&Character::operator=(Character const &rhs)
-{
-	std::cout << "[Character]= called!" << std::endl;
-	this->_name = rhs.getName();
-	this->_aP = rhs.getAP();
-	this->_aPMax = rhs.getAPMax();
-	return (*this);
-}
 std::ostream		&operator<<(std::ostream &o, Character const &rhs)
 {
 	if (rhs.getWeapon() != NULL)
