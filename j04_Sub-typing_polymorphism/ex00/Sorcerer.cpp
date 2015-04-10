@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Sorcerer.cpp                                       :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/10 13:58:10 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/10 14:01:24 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #include <iostream>
 #include <cstdlib>
@@ -6,14 +17,6 @@
 
 // ************************************************************************* //
 // ************************************************************ CONSTRUCTORS //
-
-Sorcerer::Sorcerer() :
-_name("UnknownName"), _title("UnknownTitle")
-{
-	std::cout << "[Sorcerer]() constructor called!" << std::endl;
-	return ;
-}
-
 Sorcerer::Sorcerer(Sorcerer const & src) :
 _name(src.getName()), _title(src.getTitle())
 {
@@ -55,10 +58,8 @@ std::ostream		&operator<<(std::ostream & o, Sorcerer const & rhs)
 // OPERATORS *************************************************************** //
 // ************************************************************************* //
 // ***************************************************************** GETTERS //
-std::string	const	&Sorcerer::getName(void) const
-{return (this->_name);}
-std::string	const	&Sorcerer::getTitle(void) const
-{return (this->_title);}
+std::string	const	&Sorcerer::getName(void) const{return (this->_name);}
+std::string	const	&Sorcerer::getTitle(void) const{return (this->_title);}
 // GETTERS ***************************************************************** //
 // ************************************************************************* //
 // ***************************************************************** SETTERS //

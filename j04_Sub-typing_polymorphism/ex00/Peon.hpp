@@ -1,3 +1,14 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   Peon.hpp                                           :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/04/10 13:02:29 by ngoguey           #+#    #+#             //
+//   Updated: 2015/04/10 14:02:23 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
 #ifndef PEON_HPP
 # define PEON_HPP
@@ -11,11 +22,11 @@ public:
 	Peon(std::string const name);
 	Peon(Peon const &rhs);
 	~Peon();
-	Peon					&operator=(Peon const &rhs);
 	
 	virtual void			getPolymorphed(void) const;
 	
 private:
+	Peon					&operator=(Peon const &rhs);
 	Peon();
 };
 
