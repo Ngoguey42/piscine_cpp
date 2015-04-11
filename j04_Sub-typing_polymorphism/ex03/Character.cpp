@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/11 13:10:42 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/11 14:55:25 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/11 15:51:10 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -35,6 +35,7 @@ Character::Character(Character const &src)
 Character::~Character()
 {
 	std::cout << "[Character]() Dtor called" << std::endl;
+	
 	return ;
 }
 

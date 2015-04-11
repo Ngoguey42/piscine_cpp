@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/11 15:00:40 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/11 15:13:09 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/11 15:50:41 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -27,6 +27,8 @@ MateriaSource::MateriaSource() :
 MateriaSource::~MateriaSource()
 {
 	std::cout << "[MateriaSource]() Dtor called" << std::endl;
+	if (this->_knownMaterias != NULL)
+		delete [] this->_knownMaterias;
 	return ;
 }
 
@@ -52,7 +54,7 @@ void						MateriaSource::learnMateria(AMateria *m)
 	m_ptr[this->_knownNum] = m;
 	this->_knownNum++;
 	if (this->_knownMaterias != NULL)
-		delete this->_knownMaterias;
+		delete [] this->_knownMaterias;
 	this->_knownMaterias = m_ptr;
 	return ;
 }
