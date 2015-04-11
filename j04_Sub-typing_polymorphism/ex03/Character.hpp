@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/11 13:10:36 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/11 13:29:00 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/11 14:11:26 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -31,7 +31,10 @@ public:
 	void						equip(AMateria* m);
 	void						unequip(int idx);
 	void						use(int idx, ICharacter& target);
-
+	void						destroyAll(void);
+	AMateria const				*getMateria(int idx) const;
+	AMateria					*getMateria(int idx);
+	void						describeBag(void) const;
 	
 protected:
 private:

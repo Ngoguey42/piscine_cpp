@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/10 13:02:33 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/10 14:04:10 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/11 12:29:16 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -23,7 +23,7 @@ Peon::Peon(Peon const & src) :
 }
 
 Peon::Peon(std::string const name) :
-Victim(name)
+	Victim(name)
 {
 	std::cout << "Zog zog." << std::endl;
 	return ;

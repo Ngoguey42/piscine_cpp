@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/11 13:10:42 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/11 13:28:43 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/11 14:13:29 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -27,7 +27,7 @@ Character::Character(std::string const &name) :
 Character::Character(Character const &src)
 {
 	std::cout << "[Character](Character const&) Ctor called" << std::endl;
-	*this = src;
+	Character::operator = (src);
 	return ;
 }
 
@@ -41,14 +41,30 @@ Character::~Character()
 // * OPERATORS ************************************************************** //
 Character					&Character::operator=(Character const &rhs)
 {
+	AMateria const	*ptr;
+	int				i = 0;
+
 	std::cout << "[Character]operator=" << std::endl;
-	
-	(void)rhs;
+	this->destroyAll();
+	while ((ptr = rhs.getMateria(i++)) != NULL)
+		this->equip(ptr->clone());
 	return (*this);
 }
 
 // * GETTERS **************************************************************** //
 std::string const			&Character::getName(void) const{return this->_name;}
+AMateria const              *Character::getMateria(int idx) const
+{
+	if (idx < 0 || idx >= this->_nEquiped)
+		return NULL;
+	return (this->_bag[idx]);
+}
+AMateria		              *Character::getMateria(int idx)
+{
+	if (idx < 0 || idx >= this->_nEquiped)
+		return NULL;
+	return (this->_bag[idx]);
+}
 
 // * SETTERS **************************************************************** //
 // * MEMBER FUNCTIONS / METHODS ********************************************* //
@@ -77,6 +93,23 @@ void						Character::use(int idx, ICharacter& target)
 	if (idx < 0 || idx >= this->_nEquiped)
 		return ;
 	this->_bag[idx]->use(target);
+	return ;
+}
+void						Character::destroyAll(void)
+{
+	for (int i = 0; i < this->_nEquiped; i++)
+	{
+		delete this->_bag[i];
+		this->_bag[i] = NULL;
+	}
+	this->_nEquiped = 0;
+	return ;
+}
+void						Character::describeBag(void) const
+{
+	for (int i = 0; i < this->_nEquiped; i++)
+		std::cout << "#" << i << " " << this->_bag[i]->getName() << " " <<
+			this->_bag[i]->getXP() << "xp" << std::endl;
 	return ;
 }
 
