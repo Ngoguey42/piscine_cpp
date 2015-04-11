@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/11 13:10:42 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/11 14:13:29 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/11 14:55:25 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -44,6 +44,7 @@ Character					&Character::operator=(Character const &rhs)
 	AMateria const	*ptr;
 	int				i = 0;
 
+	this->_name = rhs.getName();
 	std::cout << "[Character]operator=" << std::endl;
 	this->destroyAll();
 	while ((ptr = rhs.getMateria(i++)) != NULL)
