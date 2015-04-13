@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/31 14:07:07 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/31 15:32:30 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/13 13:04:59 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -101,7 +101,7 @@ OfficeBlock::MissingSigner::~MissingSigner() throw()
 }
 const char *OfficeBlock::MissingSigner::what() const throw()
 {
-	return ("Missing intern");
+	return ("Missing signer");
 }
 
 

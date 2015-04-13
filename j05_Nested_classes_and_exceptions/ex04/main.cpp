@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/30 11:58:09 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/31 15:47:30 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/13 13:07:29 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -56,10 +56,10 @@ int							main(void)
 	DO_AND_PRINT(ob1->doBureaucracy("Shrubbery Creation Form", "Victimlol"););
 	DO_AND_PRINT(ob1->setIntern(&in););
 	DO_AND_PRINT(ob1->doBureaucracy("Shrubbery Creation Form", "Victimlol"););
-	DO_AND_PRINT(ob1->setExecuter(&b););
+	DO_AND_PRINT(ob1->setSigner(&bo););
 	DO_AND_PRINT(ob1->doBureaucracy("Shrubbery Creation Form", "Victimlol"););
 
-	DO_AND_PRINT(ob1->setSigner(&bo););
+	DO_AND_PRINT(ob1->setExecuter(&b););
 	DO_AND_PRINT(ob1->doBureaucracy("Shrubbery Creation Form", "Victimlol"););
 	
 	DO_AND_PRINT(ob1->setExecuter(&bo););
