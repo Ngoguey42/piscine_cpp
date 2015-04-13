@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/30 11:58:09 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/30 13:10:00 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/13 12:54:15 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -16,11 +16,12 @@
 
 void					test1(Bureaucrat &b, Form &f)
 {
+	std::cout << "\033[35mtest1: \033[0m" << std::endl;
+	
 	std::cout << b.getName() << "(" << b.getGrade() <<
 		") trying to sign " << f.getName() << "(" << f.getSGrade() <<
 		")" << std::endl;
 	b.signForm(f);
-	std::cout << "Ok test" << std::endl;
 	std::cout << std::endl;
 	return ;
 }
@@ -68,7 +69,7 @@ int							main(void)
 	Bureaucrat		bo("Boss", Bureaucrat::highestGrade);
 	Form			v("Paplard vert", 1, 150);
 	Form			r("Paplard rouge", 150, 1);
-	
+
 	std::cout << b << std::endl;
 	std::cout << bo << std::endl;
 	std::cout << r << std::endl;
@@ -81,6 +82,5 @@ int							main(void)
 	test1(bo, r);
 	test3();
 
-	
 	return (0);
 }

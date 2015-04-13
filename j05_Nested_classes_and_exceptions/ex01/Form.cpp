@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/13 16:15:54 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/30 12:17:41 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/13 12:55:11 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -107,12 +107,12 @@ void						Form::beSigned(Bureaucrat const &b)
 	if (!this->_isSigned)
 	{
 		if (b.getGrade() > this->_sGrade)
-			throw Form::GradeTooLowException();
+			throw Form::GradeTooLowException();		
 		this->_isSigned = true;
 	}
 	else
 		std::cout << this->_name << " is already signed..." << std::endl;
-	return ;
+		return ;
 }
 
 
