@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/24 08:45:05 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/14 17:52:53 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 18:21:47 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -299,7 +299,7 @@ void						Converter::describeAsChar(void)
 	std::cout << std::endl;
 	return ;
 }
-void						Converter::describeAsInt(void)
+void						Converter::describeAsInt(void) const
 {
 	std::cout << "int: ";
 	if (this->_mainType <= 4 && this->_mainType > 0)
@@ -321,7 +321,7 @@ void						Converter::describeAsInt(void)
 	std::cout << std::endl;
 	return ;
 }
-void						Converter::describeAsFloat(void)
+void						Converter::describeAsFloat(void) const
 {
 	std::cout << "float: ";
 	std::cout.setf(std::ios_base::showpoint);
@@ -338,7 +338,7 @@ void						Converter::describeAsFloat(void)
 	std::cout << std::endl;
 	return ;
 }
-void						Converter::describeAsDouble(void)
+void						Converter::describeAsDouble(void) const
 {
 	std::cout << "double: ";
 	std::cout.setf(std::ios_base::showpoint);
