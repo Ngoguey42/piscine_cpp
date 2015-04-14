@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/14 11:22:58 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/14 12:47:33 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 14:02:56 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -31,8 +31,15 @@ public:
 		iterator(iterator const &src);
 		~iterator();
 		iterator				&operator=(iterator const &rhs);
+		bool					operator!=(iterator const &rhs);
+
 		T						operator*(void);
+		iterator				&operator++(void);
+		iterator				operator++(int);
+		iterator				&operator--(void);
+		iterator				operator--(int);
 		void					setPtr(T *ptr);
+		void					printAdress(void);
 		
 	private:
 		T						*_ptr;

@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/13 14:11:18 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/14 12:46:00 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 14:13:48 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -36,41 +36,50 @@ int							main(void)
 {
 	std::cout << "===============PART1:========" << std::endl;
 	{
+		
 		MutantStack<int> mstack;
+
 		mstack.push(5);
 		mstack.push(17);
+		
 		std::cout << mstack.top() << std::endl;
+		
 		mstack.pop();
+		
 		std::cout << mstack.size() << std::endl;
-		mstack.push(3); mstack.push(5); mstack.push(737); mstack.push(0);
-		// MutantStack<int>::iterator it = mstack.begin();
-
-		// std::cout << *it << std::endl;
 		
+		mstack.push(3);
+		mstack.push(5);
+		mstack.push(737);
+		mstack.push(0);
+
+		{
+			std::cout << std::endl;
+			
+			std::cout << "iterating through mutantstacks" << std::endl;
+			
+			MutantStack<int>::iterator it = mstack.begin();
+			it.printAdress();
+			MutantStack<int>::iterator ite = mstack.end();
+
+			++it;
+			--it;
+			
+			while (it != ite) {
+				std::cout << "\t" << *it << std::endl;
+				++it; }
+			std::cout << "finished iterating through mutantstacks" << std::endl << std::endl;
+		}
 		
-		MutantStack<int>::iterator ite = mstack.end();
-		// ++it;
-		// --it;
-		// while (it != ite) {
-		// 	std::cout << *it << std::endl;
-		// 	++it; }
-		// std::stack<int> s(mstack);MutantStack<int> mstack; mstack.push(5);
-		// mstack.push(17);
-		// std::cout << mstack.top() << std::endl;
-		// mstack.pop();
-		// std::cout << mstack.size() << std::endl;
-		// mstack.push(3); mstack.push(5); mstack.push(737); mstack.push(0);
-		// MutantStack<int>::iterator it = mstack.begin(); MutantStack<int>::iterator ite = mstack.end();
-		// ++it;
-		// --it;
-		// while (it != ite) {
-		// 	std::cout << *it << std::endl;
-		// 	++it; }
-		// std::stack<int> s(mstack);
-
-
-
-		std::cout << *ite << std::endl;
+		std::cout << "new stack 's' with copy constructor:" << std::endl;
+		std::stack<int> s(mstack);
+		std::cout << "printing/poping stack 's':" << std::endl;
+		while (s.size() > 0) {
+			std::cout << "\t" <<  s.top() << std::endl;
+			s.pop();
+		}
+		
+		(void)s;
 	}
 
 	

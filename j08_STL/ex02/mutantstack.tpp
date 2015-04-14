@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/14 11:46:15 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/14 12:49:51 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 14:16:43 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -53,18 +53,20 @@ MutantStack<T>				&MutantStack<T>::operator=(
 template <typename T>
 typename MutantStack<T>::iterator	MutantStack<T>::begin(void)
 {
-	
-	return (iterator());
+	typename MutantStack<T>::iterator	it;
+
+	this->top();
+	it.setPtr(&this->top());
+	std::advance(it, -this->size() + 1);
+	return (it);
 }
 template <typename T>
 typename MutantStack<T>::iterator	MutantStack<T>::end(void)
 {
 	typename MutantStack<T>::iterator	it;
 
-	it.setPtr(&this->top() + 1);
-	
-	return (it);
-	
+	it.setPtr(&this->top() + 1);	
+	return (it);	
 }
 
 // * NESTED_CLASSES ********************************************************* //
@@ -89,7 +91,7 @@ MutantStack<T>::iterator::iterator(
 	std::cout <<
 		"[MutantStack::iterator](MutantStack::iterator const &) Ctor called" <<
 		std::endl;
-	(void)src;
+	iterator::operator = (src);
 	return ;
 }
 	// * OPERATORS ****************** //
@@ -103,6 +105,44 @@ typename MutantStack<T>::iterator	&MutantStack<T>::iterator::operator=(
 	return (*this);
 }
 template<typename T>
+bool						MutantStack<T>::iterator::operator!=(
+	typename MutantStack<T>::iterator const &rhs)
+{
+	return (_ptr != rhs._ptr);
+}
+template<typename T>
+typename MutantStack<T>::iterator	&MutantStack<T>::iterator::operator++(
+	void)
+{
+	_ptr++;
+	return (*this);
+}
+template<typename T>
+typename MutantStack<T>::iterator	MutantStack<T>::iterator::operator++(
+	int)
+{
+	typename MutantStack<T>::iterator	cpy;
+
+	cpy++;
+	return (cpy);
+}
+template<typename T>
+typename MutantStack<T>::iterator	&MutantStack<T>::iterator::operator--(
+	void)
+{
+	_ptr--;
+	return (*this);
+}
+template<typename T>
+typename MutantStack<T>::iterator	MutantStack<T>::iterator::operator--(
+	int)
+{
+	typename MutantStack<T>::iterator	cpy;
+
+	cpy--;
+	return (cpy);
+}
+template<typename T>
 T							MutantStack<T>::iterator::operator*(void)
 {
 	return (*_ptr);
@@ -113,5 +153,11 @@ void						MutantStack<T>::iterator::setPtr(
 	T *ptr)
 {
 	this->_ptr = ptr;
+	return ;
+}
+template<typename T>
+void						MutantStack<T>::iterator::printAdress(void)
+{
+	std::cout << (void*)_ptr << std::endl;
 	return ;
 }
