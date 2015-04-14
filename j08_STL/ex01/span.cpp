@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/13 16:59:08 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/14 10:04:33 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 10:17:02 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -58,8 +58,6 @@ void						Span::addNumber(int i)
 {
 	if (_size >= _maxSize)
 		throw std::logic_error("The vector is full");
-	if (std::find(_vector.begin(), _vector.end(), i) != _vector.end())
-		throw std::logic_error("Value already in vector");
 	_vector.push_back(i);
 	_size++;
 	_refresh = true;
@@ -104,33 +102,17 @@ unsigned int				Span::longestSpan(void)
 void						Span::merge(std::vector<int>::const_iterator begin,
 										std::vector<int>::iterator const &end)
 {
-	size_t		nAlreadyIn = 0;
-
 	while (_size < _maxSize && begin != end)
 	{
-		if (std::find(_vector.begin(), _vector.end(), *begin) != _vector.end())
-			nAlreadyIn++;
 		_vector.push_back(*begin);
 		_size++;
 		_refresh = true;
 		begin++;
 	}
 	if (begin == end)
-	{
-		if (nAlreadyIn == 0)
-			std::cout << "Vector merged successfully !" << std::endl;
-		else
-			std::cout << "Vector fully merged, with " << nAlreadyIn <<
-				" entries discarded" << std::endl;
-	}
+		std::cout << "Vector merged successfully !" << std::endl;
 	else
-	{
-		if (nAlreadyIn == 0)
-			std::cout << "Could not fully merge vector" << std::endl;
-		else
-			std::cout << "Vector partially merged, with " << nAlreadyIn <<
-				" entries discarded" << std::endl;		
-	}
+		std::cout << "Could not fully merge vector" << std::endl;
 	return ;
 }
 

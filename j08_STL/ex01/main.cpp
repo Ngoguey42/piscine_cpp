@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/13 14:11:18 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/14 10:04:47 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 10:16:18 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -49,7 +49,7 @@ int							main(void)
 	std::cout << "===============PART2:========" << std::endl;
 	{	
 	
-		Span		s(4);
+		Span		s(5);
 
 		DO_AND_PRINT(std::cout << s.shortestSpan() << std::endl;);
 		DO_AND_PRINT(s.addNumber(5););
