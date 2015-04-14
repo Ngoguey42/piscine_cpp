@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/13 16:59:08 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/14 10:17:02 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 10:42:39 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -63,6 +63,23 @@ void						Span::addNumber(int i)
 	_refresh = true;
 	return ;
 }
+void						Span::addNumber(std::vector<int>::const_iterator begin,
+											std::vector<int>::iterator const &end)
+{
+	while (_size < _maxSize && begin != end)
+	{
+		_vector.push_back(*begin);
+		_size++;
+		_refresh = true;
+		begin++;
+	}
+	if (begin == end)
+		std::cout << "Vector merged successfully !" << std::endl;
+	else
+		std::cout << "Could not fully merge vector" << std::endl;
+	return ;
+}
+
 unsigned int				Span::shortestSpan(void)
 {
 
@@ -97,23 +114,6 @@ unsigned int				Span::longestSpan(void)
 		_refresh = false;
 	}
 	return (_maxSpan);
-}
-
-void						Span::merge(std::vector<int>::const_iterator begin,
-										std::vector<int>::iterator const &end)
-{
-	while (_size < _maxSize && begin != end)
-	{
-		_vector.push_back(*begin);
-		_size++;
-		_refresh = true;
-		begin++;
-	}
-	if (begin == end)
-		std::cout << "Vector merged successfully !" << std::endl;
-	else
-		std::cout << "Could not fully merge vector" << std::endl;
-	return ;
 }
 
 // * NESTED_CLASSES ********************************************************* //

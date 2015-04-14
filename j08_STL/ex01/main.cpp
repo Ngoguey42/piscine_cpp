@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/13 14:11:18 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/14 10:16:18 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 10:26:37 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -75,7 +75,7 @@ int							main(void)
 		DO_AND_PRINT(v.resize(20 * 1000 - 4););
 		// std::generate_n(v.begin(), 25 *1000, &std::rand);
 		DO_AND_PRINT(std::generate_n(v.begin(), 20 * 1000 - 4, &std::rand););
-		DO_AND_PRINT(s.merge(v.begin(), v.end()););
+		DO_AND_PRINT(s.addNumber(v.begin(), v.end()););
 		std::cout << std::endl;
 		DO_AND_PRINT(std::cout << s << std::endl;);
 		DO_AND_PRINT(std::cout << s.shortestSpan() << std::endl;);
