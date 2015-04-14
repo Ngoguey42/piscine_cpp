@@ -6,13 +6,14 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/24 08:45:05 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/24 13:58:28 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 17:29:18 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #include <sstream>
 #include <cmath>
 #include <limits>
+#include <iomanip>
 #include <string>
 #include "Converter.hpp"
 
@@ -219,100 +220,141 @@ int							Converter::detectFloatDoubleMainType()
 		cpy.find_first_not_of("0123456789.+-") != std::string::npos)
 		return (0);
 	if (type == 11)
-		detectDouble(cpy);
-	else
-		detectFloat(cpy);
-	return (type);
+		return (detectDouble(cpy));
+	return (detectFloat(cpy));
 }
 
-void						Converter::detectFloat(std::string cpy)
+int							Converter::detectFloat(std::string cpy)
 {
 	std::istringstream	iss;
 
 	iss.str(cpy);
 	iss.clear();
 	iss >> this->_asFloat;
-
 	if (iss.fail())
-		std::cout << "fail" << std::endl;
-	else
-		std::cout << "ok:" << this->_asFloat << std::endl;	
-	(void)cpy;
-	return ;
+		return (0);
+	return (9);
 }
-void						Converter::detectDouble(std::string cpy)
+int							Converter::detectDouble(std::string cpy)
 {
-	(void)cpy;
+	std::istringstream	iss;
+
+	iss.str(cpy);
+	iss.clear();
+	iss >> this->_asDouble;
+	if (iss.fail())
+		return (0);
+	return (11);
+}
+
+
+static void					printTruc(char c)
+{
+	std::cout << "'";
+	if (c >= ' ' && c <= '~')
+		std::cout << c;
+	else if (c == '\a')
+		std::cout << "\\a";
+	else if (c == '\b')
+		std::cout << "\\b";
+	else if (c == '\f')
+		std::cout << "\\f";
+	else if (c == '\n')
+		std::cout << "\\n";
+	else if (c == '\r')
+		std::cout << "\\r";
+	else if (c == '\t')
+		std::cout << "\\t";
+	else if (c == '\v')
+		std::cout << "\\v";
+	else if (c == '\\')
+		std::cout << "\\\\";
+	else if (c == '\'')
+		std::cout << "\\'";
+	else if (c == '\"')
+		std::cout << "\\\"";
+	else if (c == '\?')
+		std::cout << "\\?";
+	else
+		std::cout << '\\' << std::oct << (int)c;
+	std::cout << "'";
 	return ;
 }
 
 void						Converter::describeAsChar(void)
 {
 	std::cout << "char: ";
-	if (this->_mainType == 0 || this->_mainType >= 8 ||
-		(this->_mainType >= 5 && (this->_asInt < 0 || this->_asInt > 0177)))
-		std::cout << "impossible" << std::endl;
-	else
+	if (this->_mainType == 0 || this->_mainType == 8 || this->_mainType == 10)
+		std::cout << "impossible";
+	else if (this->_mainType >= 5)
 	{
-		if (this->_mainType >= 5)
-			this->_asChar = static_cast<char>(this->_asInt);
-		if (this->_asChar >= ' ' && this->_asChar <= '~')
-			std::cout << this->_asChar << std::endl;
+		if (this->_mainType == 9)
+			this->_asInt = static_cast<int>(this->_asFloat);
+		else if (this->_mainType == 11)
+			this->_asInt = static_cast<int>(this->_asDouble);
+		if (this->_asInt >= 0 && this->_asInt <= 0177)
+			printTruc(static_cast<char>(this->_asInt));
 		else
-		{
-			std::cout << "'";
-			if (this->_asChar == '\a')
-				std::cout << "\\a";
-			else if (this->_asChar == '\b')
-				std::cout << "\\b";
-			else if (this->_asChar == '\f')
-				std::cout << "\\f";
-			else if (this->_asChar == '\n')
-				std::cout << "\\n";
-			else if (this->_asChar == '\r')
-				std::cout << "\\r";
-			else if (this->_asChar == '\t')
-				std::cout << "\\t";
-			else if (this->_asChar == '\v')
-				std::cout << "\\v";
-			else if (this->_asChar == '\\')
-				std::cout << "\\\\";
-			else if (this->_asChar == '\'')
-				std::cout << "\\'";
-			else if (this->_asChar == '\"')
-				std::cout << "\\\"";
-			else if (this->_asChar == '\?')
-				std::cout << "\\?";
-			else
-				std::cout << '\\' << std::oct << (int)this->_asChar;
-			std::cout << "'" << std::endl;
-		}
+			std::cout << "impossible";
 	}
+	else
+		printTruc(_asChar);
+	std::cout << std::endl;
 	return ;
 }
 void						Converter::describeAsInt(void)
 {
 	std::cout << "int: ";
-	if (this->_mainType <= 4)
-		this->_asInt = static_cast<int>(this->_asChar);
-	if (this->_mainType >= 8)
-		std::cout << "impossible";
-	else
+	if (this->_mainType <= 4 && this->_mainType > 0)
+		std::cout << static_cast<int>(this->_asChar);
+	else if (
+		this->_mainType == 9 &&
+		this->_asFloat > static_cast<float>(std::numeric_limits<int>::min()) &&
+		this->_asFloat < static_cast<float>(std::numeric_limits<int>::max()))
+		std::cout << static_cast<int>(this->_asFloat);
+	else if (
+		this->_mainType == 11 &&
+		this->_asDouble > static_cast<double>(std::numeric_limits<int>::min()) &&
+		this->_asDouble < static_cast<double>(std::numeric_limits<int>::max()))
+		std::cout << static_cast<int>(this->_asDouble);
+	else if (this->_mainType <= 7 && this->_mainType > 0)
 		std::cout << std::dec << this->_asInt;
+	else
+		std::cout << "impossible";
 	std::cout << std::endl;
 	return ;
 }
 void						Converter::describeAsFloat(void)
 {
 	std::cout << "float: ";
-	
+	std::cout.setf(std::ios_base::showpoint);
+	if (this->_mainType >= 10)
+		std::cout << static_cast<float>(this->_asDouble) << 'f';
+	else if (this->_mainType >= 8)
+		std::cout << _asFloat << 'f';
+	else if (this->_mainType >= 5)
+		std::cout << static_cast<float>(this->_asInt) << 'f';
+	else if (this->_mainType >= 1)
+		std::cout << static_cast<float>(this->_asChar) << 'f';
+	else
+		std::cout << "impossible";
 	std::cout << std::endl;
 	return ;
 }
 void						Converter::describeAsDouble(void)
 {
 	std::cout << "double: ";
-	
+	std::cout.setf(std::ios_base::showpoint);
+	if (this->_mainType >= 10)
+		std::cout << _asDouble;
+	else if (this->_mainType >= 8)
+		std::cout << static_cast<double>(this->_asFloat);
+	else if (this->_mainType >= 5)
+		std::cout << static_cast<double>(this->_asInt);
+	else if (this->_mainType >= 1)
+		std::cout << static_cast<double>(this->_asChar);
+	else
+		std::cout << "impossible";
 	std::cout << std::endl;
 	return ;
 }

@@ -6,7 +6,7 @@ SRCSFILES = main.cpp Converter.cpp
 INCLUDES = -I ./
 SRCPATH = .
 OBJPATH = obj
-CC = g++
+CC = clang++
 CFLAGS = -Werror -Wall -Wextra
 RM = rm -rf
 

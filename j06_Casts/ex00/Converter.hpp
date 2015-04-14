@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/24 08:37:50 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/24 12:00:42 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 15:34:49 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -47,8 +47,8 @@ private:
 	int							detectCharMainType(void);
 	int							detectIntMainType(void);
 	int							detectFloatDoubleMainType(void);
-	void						detectFloat(std::string cpy);
-	void						detectDouble(std::string cpy);
+	int							detectFloat(std::string cpy);
+	int							detectDouble(std::string cpy);
 	
 
 	
