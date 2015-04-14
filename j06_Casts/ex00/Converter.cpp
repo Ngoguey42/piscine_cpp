@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/24 08:45:05 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/14 17:29:18 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 17:48:15 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -32,9 +32,6 @@ Converter::Converter(std::string const &str) :
 		this->_mainType = this->detectIntMainType();
 	if (this->_mainType == 0)
 		this->_mainType = this->detectFloatDoubleMainType();
-	std::cout << this->_mainType << std::endl;
-	// if (this->_mainType)
-	
 	return ;
 }
 
