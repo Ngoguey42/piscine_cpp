@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/13 16:54:03 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/13 18:29:19 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 09:47:20 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -30,11 +30,11 @@ public:
 	unsigned int				getMaxSize(void) const;
 
 	void						addNumber(int i);
-	int							shortestSpan(void);	
-	int							longestSpan(void);	
+	unsigned int				shortestSpan(void);	
+	unsigned int				longestSpan(void);	
 
-	// void						merge(std::vector<int>::const_iterator &b,
-									  // std::vector<int>::const_iterator &e);
+	void						merge(std::vector<int>::const_iterator begin,
+									  std::vector<int>::iterator const &end);
 
 protected:
 private:
@@ -43,10 +43,10 @@ private:
 	unsigned int				_size;
 	unsigned int				_maxSize;
 
-	int							_minSpan;
-	int							_maxSpan;
+	unsigned int				_minSpan;
+	unsigned int				_maxSpan;
 	bool						_refresh;
-	std::vector<int>			_adjDiff;
+	std::vector<unsigned int>	_adjDiff;
 
 	Span();
 	Span(Span const &src);

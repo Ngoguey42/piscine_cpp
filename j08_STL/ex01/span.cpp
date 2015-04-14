@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/13 16:59:08 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/13 18:29:31 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 10:04:33 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -47,11 +47,12 @@ unsigned int				Span::getSize(void) const{return this->_size;}
 unsigned int				Span::getMaxSize(void) const{return this->_maxSize;}
 
 // * MEMBER FUNCTIONS / METHODS ********************************************* //
-static int					customDiff(int rhs, int lhs)
+static unsigned int			customDiff(int rhs, int lhs)
 {
-	return (std::abs(lhs - rhs));
+	if (rhs > lhs)
+		return (rhs - lhs);
+	return (lhs - rhs);
 }
-
 
 void						Span::addNumber(int i)
 {
@@ -64,7 +65,7 @@ void						Span::addNumber(int i)
 	_refresh = true;
 	return ;
 }
-int							Span::shortestSpan(void)
+unsigned int				Span::shortestSpan(void)
 {
 
 	if (_size <= 1)
@@ -82,7 +83,7 @@ int							Span::shortestSpan(void)
 	}
 	return (_minSpan);
 }
-int							Span::longestSpan(void)
+unsigned int				Span::longestSpan(void)
 {
 	if (_size <= 1)
 		throw std::logic_error("Not enough values in vector");
@@ -100,10 +101,37 @@ int							Span::longestSpan(void)
 	return (_maxSpan);
 }
 
-// void						Span::merge()
-// {
-	
-	
-// }
+void						Span::merge(std::vector<int>::const_iterator begin,
+										std::vector<int>::iterator const &end)
+{
+	size_t		nAlreadyIn = 0;
+
+	while (_size < _maxSize && begin != end)
+	{
+		if (std::find(_vector.begin(), _vector.end(), *begin) != _vector.end())
+			nAlreadyIn++;
+		_vector.push_back(*begin);
+		_size++;
+		_refresh = true;
+		begin++;
+	}
+	if (begin == end)
+	{
+		if (nAlreadyIn == 0)
+			std::cout << "Vector merged successfully !" << std::endl;
+		else
+			std::cout << "Vector fully merged, with " << nAlreadyIn <<
+				" entries discarded" << std::endl;
+	}
+	else
+	{
+		if (nAlreadyIn == 0)
+			std::cout << "Could not fully merge vector" << std::endl;
+		else
+			std::cout << "Vector partially merged, with " << nAlreadyIn <<
+				" entries discarded" << std::endl;		
+	}
+	return ;
+}
 
 // * NESTED_CLASSES ********************************************************* //
