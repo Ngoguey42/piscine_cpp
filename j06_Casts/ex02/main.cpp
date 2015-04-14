@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/31 19:07:06 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/31 19:25:48 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/14 18:12:29 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -28,20 +28,19 @@ void						identify_from_pointer(Base *p)
 		*p = dynamic_cast<A&>(*p);
 		std::cout << "A" << std::endl;	
 	}
-	catch (const std::bad_cast& e)	{ (void)e;}
-	catch (...)	{ }
+	catch (const std::bad_cast&){}
 	try
 	{
 		*p = dynamic_cast<B&>(*p);
 		std::cout << "B" << std::endl;
 	}
-	catch (...)	{ }
+	catch (const std::bad_cast&){}
 	try
 	{
 		*p = dynamic_cast<C&>(*p);
 		std::cout << "C" << std::endl;	
 	}
-	catch (...)	{ }
+	catch (const std::bad_cast&){}
 	return ;
 }
 void						identify_from_reference(Base &p)
@@ -51,20 +50,19 @@ void						identify_from_reference(Base &p)
 		p = dynamic_cast<A&>(p);
 		std::cout << "A" << std::endl;	
 	}
-	catch (const std::bad_cast& e)	{ (void)e;}
-	catch (...)	{ }
+	catch (const std::bad_cast&){}
 	try
 	{
 		p = dynamic_cast<B&>(p);
 		std::cout << "B" << std::endl;
 	}
-	catch (...)	{ }
+	catch (const std::bad_cast&){}
 	try
 	{
 		p = dynamic_cast<C&>(p);
 		std::cout << "C" << std::endl;	
 	}
-	catch (...)	{ }
+	catch (const std::bad_cast&){}
 	return ;
 }
 
