@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/03/30 08:14:03 by ngoguey           #+#    #+#             //
-//   Updated: 2015/03/30 09:53:22 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/15 10:21:22 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -17,6 +17,7 @@ int							main(void)
 	Array<int>		*a;
 	Array<int>		*b;
 	Array<std::string>		*d;
+	Array<std::string>		*e;
 
 	std::cout << std::endl;
 	try
@@ -63,7 +64,7 @@ int							main(void)
 		std::cout << e.what() << std::endl;
 	}
 	std::cout << std::endl;
-
+	
 	
 	
 	try
@@ -79,6 +80,19 @@ int							main(void)
 		std::cout << "Reading" << std::endl;
 		for (int i = 0; i < 6; i++)
 			std::cout << "(*d)[" << i << "]: "<< (*d)[i] << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+	try
+	{
+		std::cout << "e = new Array<std::string>(*d)" << std::endl;
+		e = new Array<std::string>(*d);
+		std::cout << "Reading" << std::endl;
+		for (int i = 0; i < 10; i++)
+			std::cout << "(*d)[" << i << "]: "<< (*e)[i] << std::endl;
 	}
 	catch (const std::exception &e)
 	{
