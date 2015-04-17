@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/13 14:11:18 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/14 14:13:48 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/17 12:00:12 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -30,40 +30,68 @@
 #define JUST_PRINT(ARG)											\
 	std::cout << "\033[35m" << #ARG << "\033[0m" << std::endl;	
 
-	
+
+// #define USE_STD_LIST // comment/uncomment
+
+#ifndef USE_STD_LIST //DONT TOUCH
+# define CONTAINERTYPE MutantStack
+# define SECOND_CONTAINERTYPE std::stack
+# define POP_INSTRUCTION pop
+# define PUSH_INSTRUCTION push
+# define TOP_INSTRUCTION top
+#else
+# define CONTAINERTYPE std::list
+# define SECOND_CONTAINERTYPE std::list
+# define POP_INSTRUCTION pop_back
+# define PUSH_INSTRUCTION push_back
+# define TOP_INSTRUCTION back
+#endif
 
 int							main(void)
 {
 	std::cout << "===============PART1:========" << std::endl;
 	{
 		
-		MutantStack<int> mstack;
+		CONTAINERTYPE<int> mstack;
 
-		mstack.push(5);
-		mstack.push(17);
+		mstack.PUSH_INSTRUCTION(5);
+		mstack.PUSH_INSTRUCTION(17);
 		
-		std::cout << mstack.top() << std::endl;
+		std::cout << mstack.TOP_INSTRUCTION() << std::endl;
 		
-		mstack.pop();
+		mstack.POP_INSTRUCTION();
 		
 		std::cout << mstack.size() << std::endl;
 		
-		mstack.push(3);
-		mstack.push(5);
-		mstack.push(737);
-		mstack.push(0);
+		mstack.PUSH_INSTRUCTION(3);
+		mstack.PUSH_INSTRUCTION(5);
+		mstack.PUSH_INSTRUCTION(737);
+		mstack.PUSH_INSTRUCTION(0);
 
 		{
 			std::cout << std::endl;
 			
-			std::cout << "iterating through mutantstacks" << std::endl;
-			
-			MutantStack<int>::iterator it = mstack.begin();
+			std::cout << "creating iterator on begin" << std::endl;
+			CONTAINERTYPE<int>::iterator it = mstack.begin();
+			std::cout << "created iterator on begin" << std::endl;
+#ifndef USE_STD_LIST
 			it.printAdress();
-			MutantStack<int>::iterator ite = mstack.end();
-
+#endif
+			std::cout << "creating iterator on end" << std::endl;
+			CONTAINERTYPE<int>::iterator ite = mstack.end();
+			std::cout << "created iterator on end" << std::endl;
+			
+			std::cout << "testing iterator unary operators" << std::endl;
+			
 			++it;
 			--it;
+			it++;
+			it--;
+
+			--it;
+			++it;
+			it--;
+			it++;
 			
 			while (it != ite) {
 				std::cout << "\t" << *it << std::endl;
@@ -72,14 +100,13 @@ int							main(void)
 		}
 		
 		std::cout << "new stack 's' with copy constructor:" << std::endl;
-		std::stack<int> s(mstack);
-		std::cout << "printing/poping stack 's':" << std::endl;
+		SECOND_CONTAINERTYPE<int> s(mstack);
+		std::cout << "printing/POP_INSTRUCTIONing stack 's':" << std::endl;
 		while (s.size() > 0) {
-			std::cout << "\t" <<  s.top() << std::endl;
-			s.pop();
+			std::cout << "\t" <<  s.TOP_INSTRUCTION() << std::endl;
+			s.POP_INSTRUCTION();
 		}
 		
-		(void)s;
 	}
 
 	

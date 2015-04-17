@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/04/14 11:46:15 by ngoguey           #+#    #+#             //
-//   Updated: 2015/04/14 14:16:43 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/04/17 11:57:54 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -55,9 +55,13 @@ typename MutantStack<T>::iterator	MutantStack<T>::begin(void)
 {
 	typename MutantStack<T>::iterator	it;
 
-	this->top();
-	it.setPtr(&this->top());
-	std::advance(it, -this->size() + 1);
+	if (this->size() > 0)
+	{
+		it.setPtr(&this->top());
+		std::advance(it, -this->size() + 1);
+	}
+	else
+		it.setPtr(NULL);
 	return (it);
 }
 template <typename T>
@@ -65,7 +69,10 @@ typename MutantStack<T>::iterator	MutantStack<T>::end(void)
 {
 	typename MutantStack<T>::iterator	it;
 
-	it.setPtr(&this->top() + 1);	
+	if (this->size() > 0)
+		it.setPtr(&this->top() + 1);	
+	else
+		it.setPtr(NULL);
 	return (it);	
 }
 
@@ -121,9 +128,9 @@ template<typename T>
 typename MutantStack<T>::iterator	MutantStack<T>::iterator::operator++(
 	int)
 {
-	typename MutantStack<T>::iterator	cpy;
+	typename MutantStack<T>::iterator	cpy(*this);
 
-	cpy++;
+	++cpy;
 	return (cpy);
 }
 template<typename T>
@@ -137,9 +144,9 @@ template<typename T>
 typename MutantStack<T>::iterator	MutantStack<T>::iterator::operator--(
 	int)
 {
-	typename MutantStack<T>::iterator	cpy;
+	typename MutantStack<T>::iterator	cpy(*this);
 
-	cpy--;
+	--cpy;
 	return (cpy);
 }
 template<typename T>
